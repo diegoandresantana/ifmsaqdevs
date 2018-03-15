@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width" />
+	
+	<title>Lista de Jogadores</title>
+	
+	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>	
+    <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+   			<h1 class="panel-title">Lista de jogadores</h1>
+	   	</div>
+	   	
+	   	<div class="panel-body">
+			<form class="form-inline" method="POST" th:action="@{/jogadores}"
+				th:object="${jogador}" style="margin: 20px 0">
+				<div class="form-group">
+					<input type="text" class="form-control" id="nome"
+						th:field="*{nome}" placeholder="Nome" /> 
+						 
+
+					<button type="submit" class="btn btn-primary">Adicionar</button>
+				</div>
+			</form>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>Ações<th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="jogador : ${jogadores}">
+					    <td th:text="${jogador.idJogador}"></td>
+						<td th:text="${jogador.nome}"></td>
+						 <td align="center">
+							 <a th:href="@{/jogador/editar/{id}(id=${jogador.idJogador)}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
+							 <a th:href="@{/jogador/deletar/{id}(id=jogador.idJogador)}"><span class="glyphicon glyphicon-trash"></span></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
