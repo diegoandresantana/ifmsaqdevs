@@ -13,7 +13,6 @@ public class InMemorySecurityConfig {
 			.inMemoryAuthentication()
 			.withUser("admin").password("123").roles("USER")
 			.and()
-			.withUser("diego").password("123").roles("USER");
-			 
+			.withUser("diego").password("123").roles("USER");			 
 	}
 }

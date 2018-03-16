@@ -17,4 +17,5 @@ public class TimaoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TimaoApplication.class, args);
 	}
+	
 }
