@@ -21,12 +21,13 @@ public class JogadorController {
 	@Autowired
 	private InterJogadorDAO interJogadorDAO;
 	@GetMapping("/jogador")
-	public ModelAndView construir(Model model,@ModelAttribute("jogador") Jogador j) {
-		   // model.addAttribute("jogador", (j!=null)?j:new Jogador());
+	public ModelAndView construir(Model model,
+			@ModelAttribute("jogador") Jogador j) {
 		    ModelAndView modelAndView = new ModelAndView("Jogador");
-			System.out.println(j.getNome());
+
 			modelAndView.addObject("listaJogador", interJogadorDAO.findAll());
-			modelAndView.addObject("jogador", (j!=null && j.getNome()!=null)?j:new Jogador());
+			modelAndView.addObject("jogador", 
+					(j!=null && j.getNome()!=null)?j:new Jogador());
 			
 			return modelAndView;		 
 	}
@@ -59,8 +60,8 @@ public class JogadorController {
 		return "redirect:/jogador";
 	}
 	@GetMapping("/jogador/editar")
-	public ModelAndView recuperaObjeto(@ModelAttribute("id") Integer id,
-			final RedirectAttributes redirectAttributes,Model model) {
+	public ModelAndView recuperaObjeto(
+			@ModelAttribute("id") Integer id,Model model) {
 		Jogador j=this.interJogadorDAO.findOne(id);
 		return construir(model, j); 
 	}

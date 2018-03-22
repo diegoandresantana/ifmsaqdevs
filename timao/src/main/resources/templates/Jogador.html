@@ -80,10 +80,13 @@
 					<tr th:each="jog : ${listaJogador}">
 					    <td th:text="${jog.idJogador}"></td>
 						<td th:text="${jog.nome}"></td>
-						 <td align="center">
+						<td align="center">
 							<div class="btn-group pull-right">
-							 <a th:href="@{/jogador/editar/(id=${jog.idJogador})}"><span class="glyphicon glyphicon-edit"></span></a> &nbsp; &nbsp;
-							 <a th:href="@{/jogador/deletar/(id=${jog.idJogador})}"><span class="glyphicon glyphicon-trash"></span></a>
+							 <a th:href="@{/jogador/editar/(id=${jog.idJogador})}">
+							 	<span class="glyphicon glyphicon-edit"></span>
+							 </a> &nbsp; &nbsp;
+							 <a th:href="@{/jogador/deletar/(id=${jog.idJogador})}">
+							 	<span class="glyphicon glyphicon-trash"></span></a>
 						 	</div>
 						</td>
 					</tr>
