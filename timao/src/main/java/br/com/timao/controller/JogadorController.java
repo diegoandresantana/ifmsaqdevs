@@ -24,7 +24,6 @@ public class JogadorController {
 	public ModelAndView construir(Model model,
 			@ModelAttribute("jogador") Jogador j) {
 		    ModelAndView modelAndView = new ModelAndView("Jogador");
-
 			modelAndView.addObject("listaJogador", interJogadorDAO.findAll());
 			modelAndView.addObject("jogador", 
 					(j!=null && j.getNome()!=null)?j:new Jogador());
@@ -52,11 +51,9 @@ public class JogadorController {
 		if(j==null || 
 				j.getIdJogador()==null ) {
 			redirectAttributes.addFlashAttribute("deletar", "ok");	
-			
 		}else {
 			redirectAttributes.addFlashAttribute("deletar", "erro");				
-		}
-		 
+		}		 
 		return "redirect:/jogador";
 	}
 	@GetMapping("/jogador/editar")
