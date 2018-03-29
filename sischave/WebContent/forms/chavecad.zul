@@ -1,0 +1,24 @@
+<?page title="Cadastro de Chaves" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Cadastro de Chaves" border="normal"
+position="center" closable="true" mode="overlapped"
+width="500px" height="600px" >
+ <grid>
+		<columns>
+			<column label="" width="32%"/>
+			<column label=""/>
+		</columns>
+		<rows>
+			<row>	
+			  <label value="ID:" />
+			  <intbox id="idChave"/>
+			</row>
+			<row>			
+			  <label value="Descrição" />
+			  <textbox id="descricao" />
+			</row>
+			
+		</rows>
+	</grid>
+</window>
+</zk>
