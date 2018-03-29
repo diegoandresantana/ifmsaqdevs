@@ -17,8 +17,7 @@ public class Cidade implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer  idCidade;
-	
+	private Integer  idCidade;	
 	private String  nomeCidade;
 	@ManyToOne
 	private Estado estado;

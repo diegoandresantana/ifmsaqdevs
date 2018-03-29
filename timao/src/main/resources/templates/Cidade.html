@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width" />
+	
+	<title>Lista de Cidadees</title>
+	
+	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>	
+    <link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <script>
+	    setTimeout(function(){
+	        $('.alert').fadeTo("slow", 0.1, function(){
+	            $('.alert').alert('close')
+	        });     
+	        }, 3000);
+    </script>
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 10px">
+		<div class="panel-heading">
+   			<h1 class="panel-title">Lista de cidades</h1>
+	   	</div>
+	   		 <!--Mensagens de Salvamento -->
+		      <div th:if="${salvo eq 'erro'}">
+			              <div class="alert alert-danger alert-dismissible" role="alert">
+			              <button type="button" class="close" data-dismiss="alert">&times;</button>
+							  <strong>Erro!</strong> Não foi possível incluir!
+						</div>
+			  </div>
+			   <div th:if="${salvo eq 'ok'}">
+			              <div class="alert alert-success alert-dismissible" role="alert">
+			              <button type="button" class="close" data-dismiss="alert">&times;</button>
+							  <strong>Sucesso!</strong> Incluído com sucesso!
+							</div>
+			   </div>	
+			   <!-- Mensagens de deletar -->
+		      <div th:if="${deletar eq 'erro'}">
+			            <div class="alert alert-danger alert-dismissible" role="alert">
+			            <button type="button" class="close" data-dismiss="alert">&times;</button>
+							  <strong>Erro!</strong> Não foi possível excluir!
+						</div>
+			  </div>
+			   <div th:if="${deletar eq 'ok'}">
+			              <div class="alert alert-success alert-dismissible" role="alert">
+			              <button type="button" class="close" data-dismiss="alert">&times;</button>
+							  <strong>Sucesso!</strong> Excluído com sucesso!
+						 </div>
+			   </div>		           
+		        
+	   	<div class="panel-body">
+			<form   method="POST" th:action="@{/cidade/salvar}"
+				th:object="${cidade}" style="margin: 20px 0">
+				<div class="form-group">				
+				   <label for="idCidade">ID</label> 
+				   <input type="text" class="form-control" id="idCidade"
+						th:field="*{idCidade}" placeholder="ID" readonly="readonly"/>
+				</div>
+				<div class="form-group">
+					<label for="nome">Nome</label> 
+					<input type="text" class="form-control" id="nomeCidade"
+						th:field="*{nomeCidade}" placeholder="Nome"  required="required"/> 
+				</div>	
+				<div class="form-group">
+					<label for="estado">Estado</label> 
+					<select  id="estado"  th:field="*{estado.idEstado}"
+					class="form-control" required="required">
+					   <option  th:each="est : ${comboEstado}" 
+					     th:value="${est.idEstado}"
+					      th:text="${est.nomeEstado}">
+					  
+					   </option>
+					</select>
+					 
+				</div>						
+				<button type="submit" class="btn btn-primary">Adicionar</button>
+			</form>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nome</th>
+						<th>Sigla</th>
+						<th>Ações</th>
+					</tr>
+				</thead>
+				
+				<tbody>				   
+					<tr th:each="cid : ${listaCidade}">
+					    <td th:text="${cid.idCidade}"></td>
+						<td th:text="${cid.nomeCidade}"></td>
+						<td th:text="${cid.estado.sigla}"></td>
+						<td align="center">
+							<div class="btn-group pull-right">
+							 <a th:href="@{/cidade/editar/(id=${cid.idCidade})}">
+							 	<span class="glyphicon glyphicon-edit"></span>
+							 </a> &nbsp; &nbsp;
+							 <a th:href="@{/cidade/deletar/(id=${cid.idCidade})}">
+							 	<span class="glyphicon glyphicon-trash"></span></a>
+						 	</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

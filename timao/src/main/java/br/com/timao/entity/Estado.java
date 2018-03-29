@@ -23,8 +23,16 @@ public class Estado implements Serializable{
 	@OneToMany(mappedBy="estado")
 	private List<Cidade> listaCidade;
 	
+	public Estado() {
+		
+	}
 	
-	
+	public Estado(int idEstado, String nomeEstado, String sigla) {
+		this.idEstado=idEstado;
+		this.nomeEstado=nomeEstado;
+		this.sigla=sigla;
+	}
+
 	public String getSigla() {
 		return sigla;
 	}
