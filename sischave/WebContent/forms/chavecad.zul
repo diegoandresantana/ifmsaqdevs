@@ -1,8 +1,16 @@
 <?page title="Cadastro de Chaves" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="Cadastro de Chaves" border="normal"
+<window id="wchave" 
+use="br.edu.ifms.view.ChaveCad" 
+title="Cadastro de Chaves" border="normal"
 position="center" closable="true" mode="overlapped"
 width="500px" height="600px" >
+<toolbar>
+	<toolbarbutton  image="/images/btnIncluir.png" 
+	  onClick="wchave.inserir()" />
+
+</toolbar>
+
  <grid>
 		<columns>
 			<column label="" width="32%"/>
@@ -11,11 +19,11 @@ width="500px" height="600px" >
 		<rows>
 			<row>	
 			  <label value="ID:" />
-			  <intbox id="idChave"/>
+			  <intbox id="idChave" value="@{wchave.chave.idChave}"/>
 			</row>
 			<row>			
 			  <label value="Descrição" />
-			  <textbox id="descricao" />
+			  <textbox id="descricao"   value="@{wchave.chave.descricao}"/>
 			</row>
 			
 		</rows>

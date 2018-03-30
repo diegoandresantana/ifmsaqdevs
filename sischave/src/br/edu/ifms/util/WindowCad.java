@@ -23,7 +23,7 @@ public abstract class WindowCad extends Window {
 	 */
 	protected HttpSession session;
 
-	private AnnotateDataBinder binder = new AnnotateDataBinder((Desktop) this);
+	private AnnotateDataBinder binder = new AnnotateDataBinder(this);
 
 	/**
 	 * Componentes do Formulario
@@ -34,10 +34,10 @@ public abstract class WindowCad extends Window {
 		super();
 		initView();
 	}
-
+ 
 	private void initView() {
-		request = ((ExecutionImpl) Executions.getCurrent()).getArg();
-		session = (HttpSession) Executions.getCurrent().getDesktop().getSession().getNativeSession();
+		//request = ((ExecutionImpl) Executions.getCurrent()).getArg();
+		//session = (HttpSession) Executions.getCurrent().getDesktop().getSession().getNativeSession();
 	}
 	public void atualizarTela() {
 		binder.init(this, true);

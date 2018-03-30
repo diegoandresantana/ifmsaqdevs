@@ -4,7 +4,11 @@ import br.edu.ifms.entity.Chave;
 import br.edu.ifms.util.WindowCad;
 
 public class ChaveCad extends WindowCad{
-   public Chave chave=new Chave();
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public Chave chave=new Chave();
 	
 	@Override
 	public void inserir() {
