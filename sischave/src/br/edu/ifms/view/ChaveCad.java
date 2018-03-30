@@ -1,5 +1,7 @@
 package br.edu.ifms.view;
 
+import org.zkoss.zhtml.Messagebox;
+
 import br.edu.ifms.entity.Chave;
 import br.edu.ifms.util.WindowCad;
 
@@ -9,10 +11,13 @@ public class ChaveCad extends WindowCad{
 	 */
 	private static final long serialVersionUID = 1L;
 	public Chave chave=new Chave();
-	
+	public void init() {
+		atualizarTela();
+	}
 	@Override
 	public void inserir() {
-		// TODO Auto-generated method stub
+	   
+		Messagebox.show("Descrição:"+chave.getDescricao());
 		
 	}
 

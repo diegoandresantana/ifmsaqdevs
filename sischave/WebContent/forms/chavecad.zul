@@ -4,10 +4,20 @@
 use="br.edu.ifms.view.ChaveCad" 
 title="Cadastro de Chaves" border="normal"
 position="center" closable="true" mode="overlapped"
-width="500px" height="600px" >
+width="500px" height="600px" onCreate="wchave.init()">
 <toolbar>
 	<toolbarbutton  image="/images/btnIncluir.png" 
 	  onClick="wchave.inserir()" />
+	  <toolbarbutton  image="/images/btnSalvar.png" 
+	  onClick="wchave.alterar()" />
+	  <toolbarbutton  image="/images/btnApagar.png" 
+	  onClick="wchave.deletar()" />
+	  <toolbarbutton  image="/images/btnLimpar.png" 
+	  onClick="wchave.limpar()" />
+	  <toolbarbutton  image="/images/btnPesquisar.png" 
+	  onClick="wchave.pesquisar()" />	
+	  <toolbarbutton  image="/images/btnSair.png" 
+	  onClick="wchave.sair()" />
 
 </toolbar>
 
