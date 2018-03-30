@@ -12,7 +12,7 @@ import org.zkoss.zk.ui.http.ExecutionImpl;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Window;
 
-public class WindowCad extends Window{
+public abstract class WindowCad extends Window {
 	/**
 	 * Requisições
 	 */
@@ -29,14 +29,30 @@ public class WindowCad extends Window{
 	 * Componentes do Formulario
 	 */
 	private Map<String, HtmlBasedComponent> componentes = new HashMap<String, HtmlBasedComponent>();
-	 
+
 	public WindowCad() {
-			super();
+		super();
 		initView();
 	}
+
 	private void initView() {
 		request = ((ExecutionImpl) Executions.getCurrent()).getArg();
-		session = (HttpSession) Executions.getCurrent().getDesktop()
-				.getSession().getNativeSession();
-	}  
+		session = (HttpSession) Executions.getCurrent().getDesktop().getSession().getNativeSession();
+	}
+	public void atualizarTela() {
+		binder.init(this, true);
+		binder.loadAll();		
+		
+	}
+	public abstract void inserir();
+
+	public abstract void alterar();
+
+	public abstract void deletar();
+
+	public abstract void limpar();
+
+	public abstract void pesquisar();
+
+	public abstract  void sair();
 }
