@@ -20,6 +20,10 @@ public class Index {
 	public  Categoria  getCategoria() {
 		return (Categoria) categoriaInterDAO.findAll(new Sort(Sort.Direction.ASC, "nomeCategoria")) ;
 	}
+	@RequestMapping(value="/index/noticias",method = RequestMethod.GET)
+	public  Categoria  getUltimaNoticia() {
+		return (Categoria) categoriaInterDAO.findAll(new Sort(Sort.Direction.DESC, "dataPublicacao")) ;
+	}
 	
 	
 	 

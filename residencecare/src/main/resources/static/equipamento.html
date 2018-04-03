@@ -1,0 +1,172 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+	 <meta charset="UTF-8">
+       <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <style>
+            /* The switch - the box around the slider */
+            .switch {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 34px;
+            left: 15px;
+            }
+
+            /* Hide default HTML checkbox */
+            .switch input {display:none;}
+
+            /* The slider */
+            .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: red;
+            -webkit-transition: .4s;
+            transition: .4s;
+            }
+
+            .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            }
+
+            input:checked + .slider {
+            background-color: green;
+            }
+
+            input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+            -webkit-transform: translateX(43px);
+            -ms-transform: translateX(43px);
+            transform: translateX(43px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+            border-radius: 34px;
+            }
+
+            .slider.round:before {
+            border-radius: 50%;
+            }
+			.btn-link:link, .btn-link:hover, .btn-link:alink{
+				color:white !important;
+			}
+        
+        </style>
+    </head>
+    <body class="bg-dark">
+           
+        <div class="container bg-dark">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <a class="navbar-brand" href="#"><h1>Residence Care</h1></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>                      
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                          <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="equipamento.html">Ligar e Desligar Equipamentos</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="dashboard.html">Dashboard</a>
+                            </li> 
+                            <li class="nav-item">
+                              <a class="nav-link" href="historico.html">HistÃ³rico</a>
+                            </li>                               
+                          </ul>                          
+                        </div>
+                </nav>
+
+
+                <div id="accordion">
+                        <div class="card">
+                          <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <h2>Sala </h2>
+                              </button>
+                            </h5>
+                          </div>                      
+                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body ">
+                                    <div class="card bg-light text-dark">
+                                            <div class="card-body"><h3>LÃ¢mpada:</h3></div>
+                                            
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                      </div>
+                                      <div class="card bg-light text-dark">
+                                            <div class="card-body"><h3>TelevisÃ£o:</h3></div>
+                                            
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                      </div>                                                                               
+                                        
+                            </div>
+                          </div>
+                          <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <h2>Cozinha</h2>
+                                  </button>
+                                </h5>
+                              </div>                      
+                              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                <div class="card-body">
+                                        <div class="card bg-light text-dark">
+                                                <div class="card-body"><h3>LÃ¢mpada</h3> </div>
+                                                <label class="switch">
+                                                    <input type="checkbox">
+                                                    <span class="slider round"></span>
+                                                </label>  
+                                               
+                                                
+                                               
+                                          </div>
+                                          <div class="card bg-light text-dark">
+                                                <div class="card-body"><h3>TelevisÃ£o:</h3></div>
+                                                
+                                                <label class="switch">
+                                                    <input type="checkbox">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                          </div>                                                                               
+                                            
+                                </div>
+                            </div>
+                        </div>                       
+                </div>
+        </div>
+         
+    </body>
+
+</html>

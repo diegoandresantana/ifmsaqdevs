@@ -14,7 +14,7 @@ public class Dashboard {
 	@Autowired
 	private ChuvaInterDAO chuvaInterDAO;
 		 
-	@RequestMapping(value="/dashboard/temperatura",method = RequestMethod.GET)
+	@RequestMapping(value="/dashboard/temperaturaAtual",method = RequestMethod.GET)
 	public  Chuva  getTemperaturaAtual() {
 		return (Chuva) chuvaInterDAO.lastItem();
 	}
