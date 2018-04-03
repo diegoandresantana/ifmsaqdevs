@@ -12,16 +12,13 @@ import residencecare.entity.Chuva;
 public class Dashboard {
 	
 	@Autowired
-	private ChuvaInterDAO<Chuva, Long> chuvaInterDAO;
-	
-	 @RequestMapping("/")
-	    public String welcome() {//Welcome page, non-rest
-	        return "Welcome to RestTemplate Example.";
-	    }
-	 
-	 @RequestMapping(value="/dashboard/",method = RequestMethod.GET)
+	private ChuvaInterDAO chuvaInterDAO;
+		 
+	@RequestMapping(value="/dashboard/temperatura",method = RequestMethod.GET)
 	public  Chuva  getTemperaturaAtual() {
-		return (Chuva) chuvaInterDAO.getLastObject();
+		return (Chuva) chuvaInterDAO.lastItem();
 	}
+	
+	
 	 
 }
