@@ -52,11 +52,9 @@ $( document ).ready(function() {
 // Bring life to the dials
 setInterval(function () {
 	atualizaGraficoTemperatura();
-
    
 }, 2000);
-function atualizaGraficoTemperatura(){
-	
+function atualizaGraficoTemperatura(){	
 	$.ajax({
 	    type: "GET",
 	    url: "/dashboard/temperaturaAtual",
@@ -75,6 +73,18 @@ function atualizaGraficoTemperatura(){
 	        }
 	    }
 	 });
+}
+function atualizaGraficoChuva(){
+	
+	
+}
+function atualizaGraficoUmidade(){
+	
+	
+}
+function atualizaGraficoLuminosidade(){
+	
+	
 }
 
 

@@ -9,16 +9,21 @@ import residencecare.dao.inter.ChuvaInterDAO;
 import residencecare.entity.Chuva;
 
 @RestController
-public class Dashboard {
+public class ArduinoController {
 	
 	@Autowired
 	private ChuvaInterDAO chuvaInterDAO;
 		 
-	@RequestMapping(value="/dashboard/temperaturaAtual",method = RequestMethod.GET)
-	public  Chuva  getTemperaturaAtual() {
-		return (Chuva) chuvaInterDAO.lastItem();
+	@RequestMapping(value="/arduino/salvarchuva",method = RequestMethod.GET)
+	public  String salvarChuva(Chuva c) {
+		Chuva o=chuvaInterDAO.save(c);
+		if(o.getIdChuva()!=null) {
+			return "ok";
+		}else{
+			return "erro";
+		}		 
 	}
-	
+	 
 	
 	 
 }

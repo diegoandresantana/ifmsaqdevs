@@ -6,8 +6,9 @@ import org.springframework.data.repository.query.Param;
 
 import residencecare.entity.Chuva;
 
-public interface ChuvaInterDAO extends JpaRepository<Chuva, Long>, ChuvaInterCustomDAO {
-	@Query(value = "select * from Chuva c order by c.id_Chuva desc limit 1", nativeQuery = true)
+public interface ChuvaInterDAO extends JpaRepository<Chuva, Long>{
+	
+	@Query(value = "select * from Chuva c order by c.id_chuva desc limit 1", nativeQuery = true)
 	public Chuva lastItem();
 
 	// ;@Query("select c from Customer c where c.email = :email")
