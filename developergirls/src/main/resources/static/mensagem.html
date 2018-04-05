@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mensagem</title>
+<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/jqx.base.css"
+	type="text/css" />
+
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+ 
+
+<!-- Jquery API básica -->
+<script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+<!-- Core JQWidgets -->
+<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxcore.js"></script>
+<!-- DataTables JQWidgets -->
+<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxdatatable.js"></script>
+
+<!-- deserializacao -->
+<script type="text/javascript" src="../js/jquery.deserialize.js"></script>
+<!-- BootStrap -->
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<!-- javascript da tela mensagem.js -->
+<script type="text/javascript" src="mensagem.js"></script>
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+	<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.min.js"></script>
+	
+	
+</head>
+<body>
+	<div class="container">
+	<div class="panel panel-primary">
+	  <div class="panel-heading">Entrar em Contato</div>
+	  <div class="panel-body">
+	    
+	    <form id="formMensagem" name="formMensagem"  method="post">
+		 
+			 <div class="form-group">
+				<label>Nome:</label>
+				<input id="nome" name="nome" type="text" class="form-control" maxlength="200"/>
+			 </div>  
+			 <div class="form-group">
+				<label>Celular:</label>
+				<input id="celular" name="celular" type="text" class="form-control" maxlength="200"/>
+			 </div> 
+			 <div class="form-group">
+				<label>E-mail:</label>
+				<input id="email" name="email" type="text" class="form-control" maxlength="200"/>
+			 </div> 
+			 <div class="form-group">
+				<label>Texto:</label>
+				<textarea id="texto" name="texto"   class="form-control" maxlength="1000"></textarea>
+			 </div>  
+			 
+			<button id="btnEnviar" type="button">Enviar mensagem!!</button>
+		</form>	
+	  </div>
+	</div>
+		
+	 
+  </div>
+</body>
+</html>

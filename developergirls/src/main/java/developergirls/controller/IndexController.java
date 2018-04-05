@@ -20,7 +20,7 @@ import developergirls.entity.Noticia;
 import developergirls.entity.Usuario;
 
 @RestController
-public class Index {
+public class IndexController {
 	
 	@Autowired
 	private CategoriaInterDAO categoriaInterDAO;
