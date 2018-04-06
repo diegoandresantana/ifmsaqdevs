@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Lista de Jogadores</title>
+		 <!-- jQuery library -->
+		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/jqx.base.css"
+			type="text/css" />
+		
+		<link rel="stylesheet" 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		  
+		<!-- Core JQWidgets -->
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxcore.js"></script>
+		<!-- DataTables JQWidgets -->
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxbuttons.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxscrollbar.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxdata.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxdatatable.js"></script>
+		
+		<!-- deserializacao -->
+		<script type="text/javascript" src="../js/jquery.deserialize.js"></script>
+		<!-- BootStrap -->
+		<script 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+		<script type="text/javascript">
+		   $( document ).ready(function() {
+			   var source =
+	           {
+	               dataType: "json",
+	               dataFields: [
+	                   { name: 'idJogador', type: 'int' },
+	                   { name: 'nome', type: 'string'  }	                  	                 
+	               ],
+	               id: "idJogador",
+	               url: "/jogadorrest/lista"
+	           };
+	           var dataAdapter = new $.jqx.dataAdapter(source);
+	           $("#dataTableJogador").jqxDataTable(
+	           {
+	               width: "100%" ,
+	               pageable: true,
+	               sortable: true,
+	               pagerButtonsCount: 10,
+	               source: dataAdapter,
+	               columnsResize: true,
+	               columns: [
+					  { text: 'ID', dataField: 'idJogador',cellsalign: 'right', width:"25%" },
+	                 { text: 'Nome', dataField: 'nome', width: "75%" }                
+	             ]
+	           });	
+			   $("#btnPesquisar").click(function() {
+			    	//requisição controller
+			    	//pegar o retorno da lista
+			    	//carregar a grid
+			    	//atualizar a grid
+			     });		   
+		   });
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<form id="formPesquisa" name="formPesquisa">
+			
+				<button id="btnPesquisar" type="button"></button>
+			</form>
+			<div id="dataTableJogador">
+			</div>
+		</div>
+	</body>
+</html>

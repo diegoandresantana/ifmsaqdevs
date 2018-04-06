@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Estado</title>
+		 <!-- jQuery library -->
+		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/jqx.base.css"
+			type="text/css" />
+		
+		<link rel="stylesheet" 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		  
+		<!-- Core JQWidgets -->
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxcore.js"></script>
+		<!-- DataTables JQWidgets -->
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxbuttons.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxscrollbar.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxdata.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxdatatable.js"></script>
+		
+		<!-- deserializacao -->
+		<script type="text/javascript" src="../js/jquery.deserialize.js"></script>
+		<!-- BootStrap -->
+		<script 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		
+		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+		<script type="text/javascript">
+		   $( document ).ready(function() {
+			   var source =
+	           {
+	               dataType: "json",
+	               dataFields: [
+	                   { name: 'idJogador', type: 'int' },
+	                   { name: 'nome', type: 'string'  }	                  	                 
+	               ],
+	               id: "idJogador",
+	               url: "/jogadorrest/lista"
+	           };
+	           var dataAdapter = new $.jqx.dataAdapter(source);
+	           $("#dataTableJogador").jqxDataTable(
+	           {
+	               width: "100%" ,
+	               pageable: true,
+	               sortable: true,
+	               pagerButtonsCount: 10,
+	               source: dataAdapter,
+	               columnsResize: true,
+	               columns: [
+					  { text: 'ID', dataField: 'idJogador',cellsalign: 'right', width:"25%" },
+	                 { text: 'Nome', dataField: 'nome', width: "75%" }                
+	             ]
+	           });	
+			   $("#btnIncluir").click(function() {
+			    	 
+			     });
+			   $("#btnAlterar").click(function() {
+			    	 
+			     });	
+			   $("#btnDeletar").click(function() {
+			    	 
+			     });	
+			   $("#btnLimpar").click(function() {
+			    	 
+			     });	
+			   $("#btnSair").click(function() {
+			    	 
+			     });	
+			   
+		   });
+		</script>
+	</head>
+	<body>
+		<div class="container">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">Cadastro de Estado</div>
+		  <div class="panel-body">
+			<form id="formJogador" name="formJogador">
+			 <nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header" style="margin-top:6px;">
+			      <button type="button"  id="btnIncluir" title="Botão incluir!!">
+						<img src="imagens/btnIncluir.png" />
+				   </button>
+				   <button type="button"   id="btnAlterar" title="Botão Alterar!!">
+						<img src="imagens/btnAlterar.png" />
+					</button>
+					<button type="button"   id="btnDeletar"  title="Botão Deletar!!">
+					     <img src="imagens/btnDeletar.png" />
+					</button>
+					<button type="button"  id="btnLimpar"  title="Botão Limpar!!">
+						<img src="imagens/btnLimpar.png" />
+					</button>
+					<button type="button"  id="btnSair"  title="Botão Sair!!" 
+					onclick="javascript:location.href='index.html'">
+						<img src="imagens/btnSair.png" />
+					</button>
+			    </div>
+			  </div>
+			</nav>
+				<div class="form-group">				
+				   <label for="idJogador">ID</label> 
+				   <input type="text" class="form-control" id="idJogador"
+						name="idJogador" placeholder="ID" readonly="readonly"/>
+				</div>
+				<div class="form-group">
+					<label for="nome">Nome</label> 
+					<input type="text" class="form-control" id="nome"
+						name="nome" placeholder="Nome"  required="required"/> 
+				</div>				 
+			</form>
+			</div>
+		</div>	
+		<div class="panel panel-primary">
+		  <div class="panel-heading">Lista de Estados</div>
+		  <div class="panel-body">	
+			<div id="dataTableJogador">	</div>
+		   </div>
+		 </div>
+		</div>
+	</body>
+</html>

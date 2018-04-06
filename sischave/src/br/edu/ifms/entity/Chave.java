@@ -1,6 +1,11 @@
 package br.edu.ifms.entity;
 
-public class Chave {
+import java.io.Serializable;
+
+@Entity
+public class Chave implements Serializable{
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idChave;
 	private String descricao;
 	
