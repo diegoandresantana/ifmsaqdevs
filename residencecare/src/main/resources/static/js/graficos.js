@@ -52,8 +52,11 @@ $( document ).ready(function() {
 // Bring life to the dials
 setInterval(function () {
 	atualizaGraficoTemperatura();
-   
+	atualizaGraficoChuva();
+	atualizaGraficoUmidade();
+	atualizaGraficoLuminosidade();
 }, 2000);
+
 function atualizaGraficoTemperatura(){	
 	$.ajax({
 	    type: "GET",
@@ -65,7 +68,7 @@ function atualizaGraficoTemperatura(){
 	        if (chartTemperatura) {
 	            temp = chartTemperatura.series[0].points[0];
 	            obj=eval(json);
-	            if(isNaN(temp.dado)){
+	            if(isNaN(obj.dado)){
 	            	temp.update(obj.dado);
 	            }else{
 	            	temp.update(obj.dado);	            	
@@ -74,17 +77,69 @@ function atualizaGraficoTemperatura(){
 	    }
 	 });
 }
+
+ 
 function atualizaGraficoChuva(){
-	
-	
+	$.ajax({
+	    type: "GET",
+	    url: "/dashboard/chuvaAtual",
+	    data: "",
+	    dataType: "json",
+	    success: function(json){
+	        var chuv;        
+	        if (chartChuva) {
+	            chuv = chartChuva.series[0].points[0];
+	            obj=eval(json);
+	            if(isNaN(obj.dado)){
+	            	chuv.update(obj.dado);
+	            }else{
+	            	chuv.update(obj.dado);	            	
+	            }
+	        }
+	    }
+	 });
 }
+
 function atualizaGraficoUmidade(){
-	
-	
+	$.ajax({
+	    type: "GET",
+	    url: "/dashboard/umidadeAtual",
+	    data: "",
+	    dataType: "json",
+	    success: function(json){
+	        var umi;        
+	        if (chartUmidade) {
+	            umi = chartUmidade.series[0].points[0];
+	            obj=eval(json);
+	            if(isNaN(obj.dado)){
+	            	umi.update(obj.dado);
+	            }else{
+	            umi.update(obj.dado);	            	
+	            }
+	        }
+	    }
+	 });	
 }
+ 
 function atualizaGraficoLuminosidade(){
-	
-	
+		$.ajax({
+		    type: "GET",
+		    url: "/dashboard/luminosidadeAtual",
+		    data: "",
+		    dataType: "json",
+		    success: function(json){
+		        var lum;        
+		        if (chartLuminosidade) {
+		            lum = chartLuminosidade.series[0].points[0];
+		            obj=eval(json);
+		            if(isNaN(lum.dado)){
+		            	lum.update(obj.dado);
+		            }else{
+		            lum.update(obj.dado);	            	
+		            }
+		        }
+		    }
+		 });		
 }
 
 

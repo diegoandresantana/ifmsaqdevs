@@ -1,5 +1,7 @@
 package residencecare.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,8 +17,7 @@ import residencecare.entity.Temperatura;
 import residencecare.entity.Umidade;
 
 @RestController
-public class DashboardController {
-	
+public class HistoricoController {
 	
 	@Autowired
 	private ChuvaInterDAO chuvaInterDAO;
@@ -27,22 +28,22 @@ public class DashboardController {
 	@Autowired
 	private LuminosidadeInterDAO luminosidadeInterDAO;
 		 
-	@RequestMapping(value="/dashboard/temperaturaAtual",method = RequestMethod.GET)
-	public  Temperatura  getTemperaturaAtual() {
-		return (Temperatura) temperaturaInterDAO.lastItem();
+	@RequestMapping(value="/historico/historicoTemperatura",method = RequestMethod.GET)
+	public  List<Temperatura>  getTemperaturaLista() {
+		return (List<Temperatura>) temperaturaInterDAO.findAll();
 	}
 	
-	@RequestMapping(value="/dashboard/chuvaAtual",method = RequestMethod.GET)
+	@RequestMapping(value="/historico/historicochuva",method = RequestMethod.GET)
 	public  Chuva  getChuvaAtual() {
 		return (Chuva) chuvaInterDAO.lastItem();
 	}
 	
-	@RequestMapping(value="/dashboard/umidadeAtual",method = RequestMethod.GET)
+	@RequestMapping(value="/historico/umidade",method = RequestMethod.GET)
 	public  Umidade getUmidadeAtual() {
 		return (Umidade) umidadeInterDAO.lastItem();
 	}
 	
-	@RequestMapping(value="/dashboard/luminosidadeAtual",method = RequestMethod.GET)
+	@RequestMapping(value="/historico/luminosidadeAtual",method = RequestMethod.GET)
 	public  Luminosidade  getLuminosidadeAtual() {
 		return (Luminosidade) luminosidadeInterDAO.lastItem();
 	}

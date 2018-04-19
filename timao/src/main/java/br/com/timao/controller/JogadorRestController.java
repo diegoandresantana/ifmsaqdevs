@@ -12,7 +12,7 @@ import br.com.timao.entity.Jogador;
 
   
 @RestController
-public class JogadorRest {
+public class JogadorRestController {
 
 	@Autowired
 	private InterJogadorDAO interJogadorDAO;

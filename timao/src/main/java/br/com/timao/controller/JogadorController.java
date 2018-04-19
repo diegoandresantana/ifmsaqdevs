@@ -20,6 +20,8 @@ public class JogadorController {
 
 	@Autowired
 	private InterJogadorDAO interJogadorDAO;
+	
+	
 	@GetMapping("/jogador")
 	public ModelAndView construir(Model model,
 			@ModelAttribute("jogador") Jogador j) {

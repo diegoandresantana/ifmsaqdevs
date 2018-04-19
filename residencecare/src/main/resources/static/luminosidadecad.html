@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+ <!-- jQuery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+	   $( document ).ready(function() {
+		   form="formLuminosidade";
+		    
+		   $("#btnIncluir").click(function() {
+				parametros=  $("#"+form).serialize();
+				 
+				$.ajax({
+			           type: "GET", 
+			           url: "/arduino/salvarluminosidade",
+			           data:  parametros, // serializes the form's elements.
+			           success: function(resultado)
+			           { 
+			        	   if(resultado=="ok"){
+			        		   alert("Incluído com sucesso!!");
+			        		   $("#"+form)[0].reset();//clean	
+			        		   //recarregarDataTable();//recarregar a grid
+			        		   //ctrBotoes(true);//controle de botoes
+			        	   }else if(resultado=="erro"){
+			        		   alert("Não foi possível incluir!!");
+			        	   }		               
+			           }
+			         });
+			});	
+	   });
+	
+	</script>
+</head>
+<body>
+	<form id="formLuminosidade" name="formLuminosidade" method="GET" action="/arduino/salvarluminosidade">
+		Dado: <input id="dado" name="dado">
+		<button id="btnIncluir" type="button">Enviar</button>
+	</form>
+</body>
+</html>

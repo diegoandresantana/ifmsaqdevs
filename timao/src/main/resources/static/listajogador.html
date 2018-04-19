@@ -5,7 +5,7 @@
 		<title>Lista de Jogadores</title>
 		 <!-- jQuery library -->
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/jqx.base.css"
+			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css"
 			type="text/css" />
 		
 		<link rel="stylesheet" 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -54,18 +54,25 @@
 			    	//pegar o retorno da lista
 			    	//carregar a grid
 			    	//atualizar a grid
-			     });		   
+			     });
+			   $("#btnTesteAjax").click(function(){
+				    $.getJSON("/jogadorrest/lista", function(result){
+				        $.each(result, function(i, field){				        	 
+				            $("#exemplo").append(field.nome + "<br>");
+				        });
+				    });
+				});
 		   });
 		</script>
 	</head>
 	<body>
 		<div class="container">
-			<form id="formPesquisa" name="formPesquisa">
-			
-				<button id="btnPesquisar" type="button"></button>
+			<form id="formPesquisa" name="formPesquisa">			
+				<button id="btnPesquisar" type="button">Pesquisar</button>
+				<button id="btnTesteAjax" type="button">TesteAjax</button>
 			</form>
-			<div id="dataTableJogador">
-			</div>
+			<div id="dataTableJogador"></div>
+			<div id="exemplo">Meu conteudo</div>
 		</div>
 	</body>
 </html>
