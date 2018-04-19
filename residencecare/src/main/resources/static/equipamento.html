@@ -14,6 +14,8 @@
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        
+        <script src="js/equipamento.js"></script>
         <style>
             /* The switch - the box around the slider */
             .switch {
@@ -79,6 +81,15 @@
 			}
         
         </style>
+        <script  >
+        	//fazer requisição servidor
+        	//ler os itens
+        	//mudar os radios
+        	//$("#radio_1").prop("checked", true)
+        	
+        	//seleciona o botão, ele emite mensagem de desligamento ou ligar
+        
+        </script>
     </head>
     <body class="bg-dark">
            
@@ -119,18 +130,34 @@
                                             <div class="card-body"><h3>Lâmpada:</h3></div>
                                             
                                             <label class="switch">
-                                                <input type="checkbox">
+                                                <input id="rele1" name="rele1" type="checkbox">
                                                 <span class="slider round"></span>
                                             </label>
                                       </div>
                                       <div class="card bg-light text-dark">
-                                            <div class="card-body"><h3>Televisão:</h3></div>
+                                            <div class="card-body"><h3>Televisão</h3></div>
                                             
                                             <label class="switch">
-                                                <input type="checkbox">
+                                                <input id="rele2" name="rele2" type="checkbox">
                                                 <span class="slider round"></span>
                                             </label>
-                                      </div>                                                                               
+                                      </div>     
+                                       <div class="card bg-light text-dark">
+                                            <div class="card-body"><h3>Ventilador</h3></div>
+                                            
+                                            <label class="switch">
+                                                <input id="rele3" name="rele3" type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                      </div>      
+                                       <div class="card bg-light text-dark">
+                                            <div class="card-body"><h3>Tomada</h3></div>
+                                            
+                                            <label class="switch">
+                                                <input id="rele4" name="rele4" type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>
+                                      </div>                                                                                
                                         
                             </div>
                           </div>
@@ -146,7 +173,7 @@
                                         <div class="card bg-light text-dark">
                                                 <div class="card-body"><h3>Lâmpada</h3> </div>
                                                 <label class="switch">
-                                                    <input type="checkbox">
+                                                    <input  id="rele5" name="rele5" type="checkbox">
                                                     <span class="slider round"></span>
                                                 </label>  
                                                
@@ -157,7 +184,26 @@
                                                 <div class="card-body"><h3>Televisão:</h3></div>
                                                 
                                                 <label class="switch">
-                                                    <input type="checkbox">
+                                                    <input id="rele6" name="rele6" type="checkbox">
+                                                    <span class="slider round"></span>
+                                                </label>
+                                          </div>                                                                               
+                                            
+                                </div>
+                                <div class="card-body">
+                                        <div class="card bg-light text-dark">
+                                                <div class="card-body"><h3>Microondas</h3> </div>
+                                                <label class="switch">
+                                                    <input id="rele7" name="rele7" type="checkbox">
+                                                    <span class="slider round"></span>
+                                                </label>  
+                                                 
+                                          </div>
+                                          <div class="card bg-light text-dark">
+                                                <div class="card-body"><h3>Geladeira</h3></div>
+                                                
+                                                <label class="switch">
+                                                    <input id="rele8" name="rele8" type="checkbox">
                                                     <span class="slider round"></span>
                                                 </label>
                                           </div>                                                                               

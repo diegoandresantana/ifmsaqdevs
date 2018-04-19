@@ -1,5 +1,6 @@
 package residencecare.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Umidade {
+public class Umidade  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id

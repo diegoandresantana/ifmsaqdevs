@@ -14,14 +14,14 @@ public class ControleEstado implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idControleEstado;
-	private Boolean porta1;
-	private Boolean porta2;
-	private Boolean porta3;
-	private Boolean porta4;
-	private Boolean porta5;
-	private Boolean porta6;
-	private Boolean porta7;
-	private Boolean porta8;
+	private boolean porta1;
+	private boolean porta2;
+	private boolean porta3;
+	private boolean porta4;
+	private boolean porta5;
+	private boolean porta6;
+	private boolean porta7;
+	private boolean porta8;
 	
 	public Integer getIdControleEstado() {
 		return idControleEstado;
@@ -29,53 +29,53 @@ public class ControleEstado implements Serializable {
 	public void setIdControleEstado(Integer idControleEstado) {
 		this.idControleEstado = idControleEstado;
 	}
-	public Boolean getPorta1() {
+	public boolean isPorta1() {
 		return porta1;
 	}
-	public void setPorta1(Boolean porta1) {
+	public void setPorta1(boolean porta1) {
 		this.porta1 = porta1;
 	}
-	public Boolean getPorta2() {
+	public boolean isPorta2() {
 		return porta2;
 	}
-	public void setPorta2(Boolean porta2) {
+	public void setPorta2(boolean porta2) {
 		this.porta2 = porta2;
 	}
-	public Boolean getPorta3() {
+	public boolean isPorta3() {
 		return porta3;
 	}
-	public void setPorta3(Boolean porta3) {
+	public void setPorta3(boolean porta3) {
 		this.porta3 = porta3;
 	}
-	public Boolean getPorta4() {
+	public boolean isPorta4() {
 		return porta4;
 	}
-	public void setPorta4(Boolean porta4) {
+	public void setPorta4(boolean porta4) {
 		this.porta4 = porta4;
 	}
-	public Boolean getPorta5() {
+	public boolean isPorta5() {
 		return porta5;
 	}
-	public void setPorta5(Boolean porta5) {
+	public void setPorta5(boolean porta5) {
 		this.porta5 = porta5;
 	}
-	public Boolean getPorta6() {
+	public boolean isPorta6() {
 		return porta6;
 	}
-	public void setPorta6(Boolean porta6) {
+	public void setPorta6(boolean porta6) {
 		this.porta6 = porta6;
 	}
-	public Boolean getPorta7() {
+	public boolean isPorta7() {
 		return porta7;
 	}
-	public void setPorta7(Boolean porta7) {
+	public void setPorta7(boolean porta7) {
 		this.porta7 = porta7;
 	}
-	public Boolean getPorta8() {
+	public boolean isPorta8() {
 		return porta8;
 	}
-	public void setPorta8(Boolean porta8) {
+	public void setPorta8(boolean porta8) {
 		this.porta8 = porta8;
 	}
-	  
+   
 }
