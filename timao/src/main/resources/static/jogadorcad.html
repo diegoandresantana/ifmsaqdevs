@@ -91,10 +91,42 @@
 				         });
 			     });
 			   $("#btnAlterar").click(function() {
-			    	 
+				   if(!confirm("Deseja realmente alterar?"))
+				    	return ;			    	 
+				     //validar os dados
+			    	 //serializa idJogador=1&nome=DIego
+			    	 parametro=$("#formJogador").serialize();
+				     //requisição
+			    	 $.ajax({
+				           type: "POST", 
+				           url:  "/jogadorrest/salvar",
+				           data:  parametro, // serializes the form's elements.
+				           success: function(resultado)
+				           { 
+				        	   alert(resultado);
+				        	   $("#formJogador")[0].reset();
+				        	   recarregarGrid();
+				           }
+				         });
 			     });	
 			   $("#btnDeletar").click(function() {
-			    	 
+				   if(!confirm("Deseja realmente excluir?"))
+				    	return ;			    	 
+				     //validar os dados
+			    	 //serializa idJogador=1&nome=DIego
+			    	 parametro="idJogador="+$("#idJogador").val();
+				     //requisição
+			    	 $.ajax({
+				           type: "POST", 
+				           url:  "/jogadorrest/deletar",
+				           data:  parametro, // serializes the form's elements.
+				           success: function(resultado)
+				           { 
+				        	   alert(resultado);
+				        	   $("#formJogador")[0].reset();
+				        	   recarregarGrid();
+				           }
+				         });
 			     });	
 			   $("#btnLimpar").click(function() {
 			    	 $("#formJogador")[0].reset();

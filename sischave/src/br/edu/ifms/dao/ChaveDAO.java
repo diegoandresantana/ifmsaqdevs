@@ -8,7 +8,11 @@ import br.edu.ifms.entity.Chave;
 
 public class ChaveDAO  implements Serializable {
 		 	
-		 static List<Chave> lista=new ArrayList<Chave>();
+	 static List<Chave> lista=new ArrayList<Chave>();
+	
+	 public int incluir() {}
+	 public int deletar() {}
+	 public int alterar() {}
+	 public List<Chave> listar() {}
 	 
-		 
 }

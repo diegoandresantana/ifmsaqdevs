@@ -3,9 +3,9 @@ package br.com.timao.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.timao.dao.InterJogadorDAO;
@@ -36,9 +36,22 @@ public class JogadorRestController {
 	
 	@RequestMapping(value="/jogadorrest/buscarporid",
 			method = RequestMethod.POST)
-	public  Jogador buscarPorId(@Param("idJogador") Integer id) {
+	public  Jogador buscarPorId(@RequestParam("idJogador") Integer id) {
 		Jogador j=interJogadorDAO.findOne(id);
 		return j;
+	}
+	
+	@RequestMapping(value="/jogadorrest/deletar",
+			method = RequestMethod.POST)
+	public  String deletar(@RequestParam("idJogador") Integer id) {
+		 interJogadorDAO.delete(id); 
+		 Jogador j=interJogadorDAO.findOne(id);
+		 if(j==null) {
+			 return "ok";
+		 }else {
+			 return "erro";
+		 }
+		 
 	}
 	
 }
