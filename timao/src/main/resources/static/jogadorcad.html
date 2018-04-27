@@ -5,7 +5,7 @@
 		<title>Estado</title>
 		 <!-- jQuery library -->
 		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/jqx.base.css"
+			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css"
 			type="text/css" />
 		
 		<link rel="stylesheet" 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -26,6 +26,7 @@
 		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 		<script type="text/javascript">
 		   $( document ).ready(function() {
+			   //Data Table
 			   var source =
 	           {
 	               dataType: "json",
@@ -50,8 +51,44 @@
 	                 { text: 'Nome', dataField: 'nome', width: "75%" }                
 	             ]
 	           });	
+	           
+	           $("#dataTableJogador").on('rowSelect', function (event) {
+	              	var args = event.args;// event arguments
+	              	parametro="idJogador="+args.row.idJogador;
+	            	//requisição para buscar dados
+	                  $.ajax({
+	   			           type: "POST",
+	   			           url: "/jogadorrest/buscarporid",
+	   			           data:  parametro, // serializes the form's elements.
+	   			           success: function(data)
+	   			           { 
+	   			        	    	
+	   			                	    
+	   			        	   $("#formJogador").deserialize(data)	;
+	   			        	   
+	   			           }
+	   			         });
+	              	
+	           });   	
+	              	
 			   $("#btnIncluir").click(function() {
-			    	 
+				    if(!confirm("Deseja realmente incluir?"))
+				    	return ;			    	 
+				     //validar os dados
+			    	 //serializa idJogador=1&nome=DIego
+			    	 parametro=$("#formJogador").serialize();
+				     //requisição
+			    	 $.ajax({
+				           type: "POST", 
+				           url:  "/jogadorrest/salvar",
+				           data:  parametro, // serializes the form's elements.
+				           success: function(resultado)
+				           { 
+				        	   alert(resultado);
+				        	   $("#formJogador")[0].reset();
+				        	   recarregarGrid();
+				           }
+				         });
 			     });
 			   $("#btnAlterar").click(function() {
 			    	 
@@ -60,19 +97,21 @@
 			    	 
 			     });	
 			   $("#btnLimpar").click(function() {
-			    	 
+			    	 $("#formJogador")[0].reset();
 			     });	
 			   $("#btnSair").click(function() {
 			    	 
 			     });	
-			   
+			   function recarregarGrid(){
+				   $("#dataTableJogador").jqxDataTable('updateBoundData');
+			   }
 		   });
 		</script>
 	</head>
 	<body>
 		<div class="container">
 		<div class="panel panel-primary">
-		  <div class="panel-heading">Cadastro de Estado</div>
+		  <div class="panel-heading">Cadastro de Jogador</div>
 		  <div class="panel-body">
 			<form id="formJogador" name="formJogador">
 			 <nav class="navbar navbar-default">
@@ -111,7 +150,7 @@
 			</div>
 		</div>	
 		<div class="panel panel-primary">
-		  <div class="panel-heading">Lista de Estados</div>
+		  <div class="panel-heading">Lista de Jogadores</div>
 		  <div class="panel-body">	
 			<div id="dataTableJogador">	</div>
 		   </div>

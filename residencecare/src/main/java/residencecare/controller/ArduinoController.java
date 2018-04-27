@@ -25,8 +25,7 @@ public class ArduinoController {
 	private TemperaturaInterDAO temperaturaInterDAO;
 	@Autowired
 	private LuminosidadeInterDAO luminosidadeInterDAO;
-	
-		 
+			 
 	@RequestMapping(value="/arduino/salvarchuva",method = RequestMethod.GET)
 	public  String salvarChuva(Chuva c) {
 		Chuva o=chuvaInterDAO.save(c);
@@ -59,6 +58,7 @@ public class ArduinoController {
 		 
 	@RequestMapping(value="/arduino/salvarluminosidade",method = RequestMethod.GET)
 	public  String salvarLuminosidade(Luminosidade l) {
+		System.out.println(l.getDado());
 		Luminosidade o=luminosidadeInterDAO.save(l);
 		if(o.getIdLuminosidade()!=null) {
 			return "ok";
