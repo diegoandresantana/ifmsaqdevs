@@ -24,6 +24,13 @@
 		<script 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		
 		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+		<!-- Validação -->
+		<script 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script> 
+			
+		 <script 	src="/js/jquery.validate-1.14.0.min.js"></script>
+		<script 	src="/js/jquery-validate.bootstrap-tooltip.js"></script>
+		
 		<script type="text/javascript">
 		   $( document ).ready(function() {
 			   //Data Table
@@ -61,8 +68,7 @@
 	   			           url: "/jogadorrest/buscarporid",
 	   			           data:  parametro, // serializes the form's elements.
 	   			           success: function(data)
-	   			           { 
-	   			        	    	
+	   			           {       	    	
 	   			                	    
 	   			        	   $("#formJogador").deserialize(data)	;
 	   			        	   
@@ -73,7 +79,9 @@
 	              	
 			   $("#btnIncluir").click(function() {
 				    if(!confirm("Deseja realmente incluir?"))
-				    	return ;			    	 
+				    	return ;
+				    if(!validarForm())
+				    	return ;		
 				     //validar os dados
 			    	 //serializa idJogador=1&nome=DIego
 			    	 parametro=$("#formJogador").serialize();
@@ -84,9 +92,18 @@
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
-				        	   alert(resultado);
-				        	   $("#formJogador")[0].reset();
+				        	   if(resultado=='ok'){
+				        		   alert("Registro incluído com sucesso!");
+				        		   $("#formJogador")[0].reset();
+				        	   }else{
+				        		   alert("Não foi possível incluir!");
+				        	   }			        	   
+				        	   
 				        	   recarregarGrid();
+				           },
+				           error:function(xhr, erro){
+				        	   alert("Não foi possível incluir!");
+				        	   console.debug(xhr); console.debug(error);
 				           }
 				         });
 			     });
@@ -103,9 +120,18 @@
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
-				        	   alert(resultado);
-				        	   $("#formJogador")[0].reset();
+				        	   if(resultado=='ok'){
+				        		   alert("Registro alterado com sucesso!");
+				        		   $("#formJogador")[0].reset();
+				        	   }else{
+				        		   alert("Não foi possível alterar!");
+				        	   }			        	   
+				        	   
 				        	   recarregarGrid();
+				           },
+				           error:function(xhr, erro){
+				        	   alert("Não foi possível alterar!");
+				        	   console.debug(xhr); console.debug(error);
 				           }
 				         });
 			     });	
@@ -113,7 +139,7 @@
 				   if(!confirm("Deseja realmente excluir?"))
 				    	return ;			    	 
 				     //validar os dados
-			    	 //serializa idJogador=1&nome=DIego
+			    	 //serializa idJogador=1&nome=Diego
 			    	 parametro="idJogador="+$("#idJogador").val();
 				     //requisição
 			    	 $.ajax({
@@ -122,13 +148,24 @@
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
-				        	   alert(resultado);
-				        	   $("#formJogador")[0].reset();
+				        	   if(resultado=='ok'){
+				        		   alert("Registro deletado com sucesso!");
+				        		   $("#formJogador")[0].reset();
+				        	   }else{
+				        		   alert("Não foi possível deletar!");
+				        	   }			        	   
+				        	   
 				        	   recarregarGrid();
+				           },
+				           error:function(xhr, erro){
+				        	   alert("Não foi possível deletar!");
+				        	   console.debug(xhr); console.debug(error);
 				           }
 				         });
 			     });	
 			   $("#btnLimpar").click(function() {
+				   if(!confirm("Deseja realmente limpar?"))
+				    	return ;
 			    	 $("#formJogador")[0].reset();
 			     });	
 			   $("#btnSair").click(function() {
@@ -137,8 +174,29 @@
 			   function recarregarGrid(){
 				   $("#dataTableJogador").jqxDataTable('updateBoundData');
 			   }
+			  
+			   function validarForm(){
+				  var form= $("#formJogador");				  
+				  form.validate({
+					   rules: {
+					  	 nome: {required: true} 
+					   },
+					   messages: {
+					     nome: "Informe o nome!"
+					   },
+					   tooltip_options: {
+						   nome: {placement: 'left',trigger:'focus'} 
+					   } 
+					 });
+				  return form.valid(); 
+			   }
 		   });
 		</script>
+		<style>
+		   .req{
+		    	color:red;
+		   }
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -174,11 +232,15 @@
 						name="idJogador" placeholder="ID" readonly="readonly"/>
 				</div>
 				<div class="form-group">
-					<label for="nome">Nome</label> 
-					<input type="text" class="form-control" id="nome"
+					<label for="nome"><span class="req">*</span>Nome</label> 
+					<input type="text" class="form-control required" data-placement="bottom" id="nome"
 						name="nome" placeholder="Nome"  required="required"/> 
-				</div>				 
+				</div>	
+				<div class="form-group">
+				<span class="req">*Campos de preenchimento obrigatório!</span>  
+				</div>			 
 			</form>
+			
 			</div>
 		</div>	
 		<div class="panel panel-primary">

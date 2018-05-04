@@ -23,8 +23,7 @@ public class JogadorRestController {
 		return (List<Jogador>) interJogadorDAO.findAll();
 	}
 		
-	@RequestMapping(value="/jogadorrest/salvar",
-			method = RequestMethod.POST)
+	@RequestMapping(value="/jogadorrest/salvar",method = RequestMethod.POST)
 	public  String salvar(Jogador j) {
 		Jogador jog=interJogadorDAO.save(j);
 		if(jog!=null) {			
@@ -32,17 +31,14 @@ public class JogadorRestController {
 		}else {
 			return "erro";
 		}
-	}	 
-	
-	@RequestMapping(value="/jogadorrest/buscarporid",
-			method = RequestMethod.POST)
+	}	 	
+	@RequestMapping(value="/jogadorrest/buscarporid",method = RequestMethod.POST)
 	public  Jogador buscarPorId(@RequestParam("idJogador") Integer id) {
 		Jogador j=interJogadorDAO.findOne(id);
 		return j;
 	}
 	
-	@RequestMapping(value="/jogadorrest/deletar",
-			method = RequestMethod.POST)
+	@RequestMapping(value="/jogadorrest/deletar",method = RequestMethod.POST)
 	public  String deletar(@RequestParam("idJogador") Integer id) {
 		 interJogadorDAO.delete(id); 
 		 Jogador j=interJogadorDAO.findOne(id);
