@@ -22,7 +22,13 @@ public class ControleEstado implements Serializable {
 	private boolean porta6;
 	private boolean porta7;
 	private boolean porta8;
-	
+	private boolean prevencaoAtiva;
+	public boolean isPrevencaoAtiva() {
+		return prevencaoAtiva;
+	}
+	public void setPrevencaoAtiva(boolean prevencaoAtiva) {
+		this.prevencaoAtiva = prevencaoAtiva;
+	}
 	public Integer getIdControleEstado() {
 		return idControleEstado;
 	}

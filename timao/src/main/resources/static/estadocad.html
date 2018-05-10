@@ -8,7 +8,7 @@
 			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css"
 			type="text/css" />
 		
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 		  
 		<!-- Core JQWidgets -->
 		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxcore.js"></script>
@@ -23,7 +23,6 @@
 		<!-- BootStrap -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		
 		
 		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 		<!-- Validação 
@@ -41,14 +40,15 @@
 	           {
 	               dataType: "json",
 	               dataFields: [
-	                   { name: 'idJogador', type: 'int' },
-	                   { name: 'nome', type: 'string'  }	                  	                 
+	                   { name: 'idEstado', type: 'int' },
+	                   { name: 'nomeEstado', type: 'string'  },
+	                   { name: 'sigla', type: 'string'  },
 	               ],
-	               id: "idJogador",
-	               url: "/jogadorrest/lista"
+	               id: "idEstado",
+	               url: "/estadorest/lista"
 	           };
 	           var dataAdapter = new $.jqx.dataAdapter(source);
-	           $("#dataTableJogador").jqxDataTable(
+	           $("#dataTableEstado").jqxDataTable(
 	           {
 	               width: "100%" ,
 	               pageable: true,
@@ -57,38 +57,29 @@
 	               source: dataAdapter,
 	               columnsResize: true,
 	               columns: [
-					  { text: 'ID', dataField: 'idJogador',cellsalign: 'right', width:"25%" },
-	                 { text: 'Nome', dataField: 'nome', width: "75%" }                
+					  { text: 'ID', dataField: 'idEstado',cellsalign: 'right', width:"25%" },
+	                 { text: 'Nome', dataField: 'nomeEstado', width: "50%" },
+	                 { text: 'Sigla', dataField: 'sigla', width: "25%" }         
 	             ]
 	           });	
 	           
-	           $("#dataTableJogador").on('rowSelect', function (event) {
+	           $("#dataTableEstado").on('rowSelect', function (event) {
 	              	var args = event.args;// event arguments
-	              	parametro="idJogador="+args.row.idJogador;
+	              	parametro="idEstado="+args.row.idEstado;
 	            	//requisição para buscar dados
 	                  $.ajax({
 	   			           type: "POST",
-	   			           url: "/jogadorrest/buscarporid",
+	   			           url: "/estadorest/buscarporid",
 	   			           data:  parametro, // serializes the form's elements.
 	   			           success: function(data)
 	   			           {       	    	
 	   			                	    
-	   			        	   $("#formJogador").deserialize(data)	;
-	   			        	   ctrBotoes(false);
+	   			        	   $("#formEstado").deserialize(data)	;
 	   			        	   
 	   			           }
 	   			         });
 	              	
 	           });   	
-	           function ctrBotoes(incluir){/*função para controlar os botões*/
-	   			$( "#btnIncluir" ).prop( "disabled",!incluir);
-	   			$( "#btnAlterar" ).prop( "disabled", incluir);
-	   			$( "#btnDeletar" ).prop( "disabled", incluir);
-	   			$( "#btnIncluir" ).css( "display", (incluir)?"":"none" );
-	   			$( "#btnAlterar" ).css( "display", (!incluir)?"":"none" );
-	   			$( "#btnDeletar" ).css( "display", (!incluir)?"":"none"  );	   			
-	       	   }
-	   	       ctrBotoes(true);
 	              	
 			   $("#btnIncluir").click(function() {
 				    if(!confirm("Deseja realmente incluir?"))
@@ -96,19 +87,18 @@
 				    if(!validarForm())
 				    	return ;		
 				     //validar os dados
-			    	 //serializa idJogador=1&nome=DIego
-			    	 parametro=$("#formJogador").serialize();
+			    	 //serializa idEstado=1&nome=DIego
+			    	 parametro=$("#formEstado").serialize();
 				     //requisição
 			    	 $.ajax({
 				           type: "POST", 
-				           url:  "/jogadorrest/salvar",
+				           url:  "/estadorest/salvar",
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
 				        	   if(resultado=='ok'){
 				        		   alert("Registro incluído com sucesso!");
-				        		   $("#formJogador")[0].reset();
-				        		   ctrBotoes(true);
+				        		   $("#formEstado")[0].reset();
 				        	   }else{
 				        		   alert("Não foi possível incluir!");
 				        	   }			        	   
@@ -125,19 +115,18 @@
 				   if(!confirm("Deseja realmente alterar?"))
 				    	return ;			    	 
 				     //validar os dados
-			    	 //serializa idJogador=1&nome=DIego
-			    	 parametro=$("#formJogador").serialize();
+			    	 //serializa idEstado=1&nome=DIego
+			    	 parametro=$("#formEstado").serialize();
 				     //requisição
 			    	 $.ajax({
 				           type: "POST", 
-				           url:  "/jogadorrest/salvar",
+				           url:  "/estadorest/salvar",
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
 				        	   if(resultado=='ok'){
 				        		   alert("Registro alterado com sucesso!");
-				        		   $("#formJogador")[0].reset();
-				        		   ctrBotoes(true);
+				        		   $("#formEstado")[0].reset();
 				        	   }else{
 				        		   alert("Não foi possível alterar!");
 				        	   }			        	   
@@ -154,19 +143,18 @@
 				   if(!confirm("Deseja realmente excluir?"))
 				    	return ;			    	 
 				     //validar os dados
-			    	 //serializa idJogador=1&nome=Diego
-			    	 parametro="idJogador="+$("#idJogador").val();
+			    	 //serializa idEstado=1&nome=Diego
+			    	 parametro="idEstado="+$("#idEstado").val();
 				     //requisição
 			    	 $.ajax({
 				           type: "POST", 
-				           url:  "/jogadorrest/deletar",
+				           url:  "/estadorest/deletar",
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
 				        	   if(resultado=='ok'){
 				        		   alert("Registro deletado com sucesso!");
-				        		   $("#formJogador")[0].reset();
-				        		   ctrBotoes(true);
+				        		   $("#formEstado")[0].reset();
 				        	   }else{
 				        		   alert("Não foi possível deletar!");
 				        	   }			        	   
@@ -182,42 +170,43 @@
 			   $("#btnLimpar").click(function() {
 				   if(!confirm("Deseja realmente limpar?"))
 				    	return ;
-			    	 $("#formJogador")[0].reset();
-			    	 ctrBotoes(true);
+			    	 $("#formEstado")[0].reset();
 			     });	
 			   $("#btnSair").click(function() {
 			    	 
 			     });	
 			   function recarregarGrid(){
-				   $("#dataTableJogador").jqxDataTable('updateBoundData');
+				   $("#dataTableEstado").jqxDataTable('updateBoundData');
 			   }
 			  
 			   function validarForm(){
+				  var form= $("#formEstado");				  
 				   
-					  var form= $("#formJogador");
-					  form.validate({
-						   rules: {
-							   nome: {required: true}
+				  form.validate({
+					  rules: {
+						  	 nomeEstado: {required: true} ,
+						  	 sigla: {required: true} 
 						   },
 						   messages: {
-							   nome: "Informe o nome!"
+						     nomeEstado: "Informe o nome!",
+						     sigla: "Informe a sigla!"
 						   },
 						   tooltip_options: {
-							   nome: {trigger: 'focus',placement: 'right'}
-						   },
-						   errorElement: 'em',
-					       errorPlacement: function (error, element) {
-						    	   $('[data-toggle=\'tooltip\']').removeAttr('name');
-						    	   error.addClass('help-block');
-						    	   error.insertAfter(element);
-					            },
-					            highlight: function (element, errorClass, validClass) {
-					              $(element).parents('.col-md-12').addClass('has-error').removeClass('has-success');
-					            },
-					            unhighlight: function (element, errorClass, validClass) {
-					              $(element).parents('.col-md-12').addClass('has-success').removeClass('has-error');
-					            }
-					   });
+							   nomeEstado: {placement: 'left',trigger:'focus'} 
+						   } ,
+					   errorElement: 'em',
+				       errorPlacement: function (error, element) {
+					    	   $('[data-toggle=\'tooltip\']').removeAttr('name');
+					    	   error.addClass('help-block');
+					    	   error.insertAfter(element);
+				            },
+				            highlight: function (element, errorClass, validClass) {
+				              $(element).parents('.col-md-12').addClass('has-error').removeClass('has-success');
+				            },
+				            unhighlight: function (element, errorClass, validClass) {
+				              $(element).parents('.col-md-12').addClass('has-success').removeClass('has-error');
+				            }
+				   });
 				  return form.valid(); 
 			   }
 		   });
@@ -231,9 +220,9 @@
 	<body>
 		<div class="container">
 		<div class="card">
-		  <div class="card-header bg-primary text-white">Cadastro de Jogador</div>
+		  <div class="card-header bg-primary text-white">Cadastro de Estado</div>
 		  <div class="card-body">	
-			<form id="formJogador" name="formJogador">
+			<form id="formEstado" name="formEstado">
 			 <nav class="navbar navbar-default">
 			  <div class="container-fluid">
 			    <div class="navbar-header" style="margin-top:6px;">
@@ -257,14 +246,19 @@
 			  </div>
 			</nav>
 				<div class="form-group">				
-				   <label for="idJogador">ID</label> 
-				   <input type="text" class="form-control" id="idJogador"
-						name="idJogador" placeholder="ID" readonly="readonly"/>
+				   <label for="idEstado">ID</label> 
+				   <input type="text" class="form-control" id="idEstado"
+						name="idEstado" placeholder="ID" readonly="readonly"/>
 				</div>
 				<div class="form-group">
-					<label for="nome"><span class="req">*</span>Nome</label> 
-					<input type="text" class="form-control required" data-placement="bottom" id="nome"
-						name="nome" placeholder="Nome"  required="required"/> 
+					<label for="nomeEstado"><span class="req">*</span>Nome</label> 
+					<input type="text" class="form-control required informa" data-placement="bottom" id="nome"
+						name="nomeEstado" placeholder="Nome Estado"  required="required"  data-toggle='tooltip'  aria-required="true"/> 
+				</div>	
+				<div class="form-group">
+					<label for="sigla"><span class="req">*</span>Sigla</label> 
+					<input type="text" class="form-control required informa" data-placement="bottom" id="sigla"
+						name="sigla" placeholder="Sigla"  required="required"  data-toggle='tooltip'  aria-required="true"/> 
 				</div>	
 				<div class="form-group">
 				<span class="req">*Campos de preenchimento obrigatório!</span>  
@@ -274,9 +268,9 @@
 			</div>
 		</div>	
 		<div class="card">
-		  <div class="card-header bg-primary text-white">Lista de Jogadores</div>
+		  <div class="card-header bg-primary text-white">Lista de Estados</div>
 		  <div class="card-body">	
-			<div id="dataTableJogador">	</div>
+			<div id="dataTableEstado">	</div>
 		   </div>
 		 </div>
 		</div>

@@ -20,7 +20,69 @@
 		<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 		
 		<script src="js/graficos.js"></script>
+		<script>
 		
+		$(document).ready(function() {
+			notificacao();
+				setInterval(function(){ notificacao(); }, 10000);
+			});
+		    function manterLigado() {
+		    	$.ajax(
+						{
+							url : "/equipamento/desativarprevencao",
+							type: "GET",
+							success: function(data, textStatus, jqXHR)
+							{
+							  alert("Sistema de prevenção desativado!!!");
+							},
+							error: function(jqXHR, textStatus, errorThrown)
+							{
+			
+							}
+						});			    	
+		    }
+			function notificacao() {
+				if (!Notification) {
+					$('body').append('<h4 style="color:red">*Browser does not support Web Notification</h4>');
+					return;
+				}
+				if (Notification.permission !== "granted")
+					Notification.requestPermission();
+				else {
+					$.ajax(
+					{
+						url : "/equipamento/alerta",
+						type: "GET",
+						success: function(data, textStatus, jqXHR)
+						{
+							 
+							if(data== true){
+								 
+									var notifikasi = new Notification("Alerta de Desligamento!", {
+										icon: "imagens/alerta.png",
+										body: ' Para manter ligado os equipamentos clique aqui!!<button>' 
+									});
+									notifikasi.onclick = function () {
+										 manterLigado();
+										notifikasi.close();     
+									};
+									setTimeout(function(){
+										notifikasi.close();
+									}, 5000);
+								 
+							}else{
+		
+							}
+						},
+						error: function(jqXHR, textStatus, errorThrown)
+						{
+		
+						}
+					});	
+		
+				}
+			};
+		</script>
         <style>
             /* The switch - the box around the slider */
             .switch {
