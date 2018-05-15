@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Estado implements Serializable{
 
@@ -18,9 +21,9 @@ public class Estado implements Serializable{
 	private Integer idEstado;	
 	private String nomeEstado;	
 	private String sigla;
-	
-	@OneToMany(mappedBy="estado")
-	private List<Cidade> listaCidade;
+	@JsonIgnore
+ 	@OneToMany(mappedBy="estado",fetch = FetchType.LAZY)
+ 	private List<Cidade> listaCidade;
 	
 	public Estado() {
 		

@@ -8,7 +8,7 @@
 			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css"
 			type="text/css" />
 		
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
 		  
 		<!-- Core JQWidgets -->
 		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxcore.js"></script>
@@ -23,6 +23,7 @@
 		<!-- BootStrap -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		
 		
 		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 		<!-- Validação 
@@ -40,15 +41,15 @@
 	           {
 	               dataType: "json",
 	               dataFields: [
-	                   { name: 'idEstado', type: 'int' },
-	                   { name: 'nomeEstado', type: 'string'  },
-	                   { name: 'sigla', type: 'string'  },
+	                   { name: 'idCidade', type: 'int' },
+	                   { name: 'nomeCidade', type: 'string'  },	 
+	                   { name: 'sigla', type: 'string' ,map: 'estado>sigla' }
 	               ],
-	               id: "idEstado",
-	               url: "/estadorest/lista"
+	               id: "idCidade",
+	               url: "/cidaderest/lista"
 	           };
 	           var dataAdapter = new $.jqx.dataAdapter(source);
-	           $("#dataTableEstado").jqxDataTable(
+	           $("#dataTableCidade").jqxDataTable(
 	           {
 	               width: "100%" ,
 	               pageable: true,
@@ -57,57 +58,60 @@
 	               source: dataAdapter,
 	               columnsResize: true,
 	               columns: [
-					  { text: 'ID', dataField: 'idEstado',cellsalign: 'right', width:"25%" },
-	                 { text: 'Nome', dataField: 'nomeEstado', width: "50%" },
-	                 { text: 'Sigla', dataField: 'sigla', width: "25%" }         
+					  { text: 'ID', dataField: 'idCidade',cellsalign: 'right', width:"25%" },
+	                 { text: 'Nome', dataField: 'nomeCidade', width: "50%" } ,
+	                 { text: 'Estado', dataField: 'sigla', width: "25%" }
 	             ]
 	           });	
 	           
-	           $("#dataTableEstado").on('rowSelect', function (event) {
+	           $("#dataTableCidade").on('rowSelect', function (event) {
 	              	var args = event.args;// event arguments
-	              	parametro="idEstado="+args.row.idEstado;
+	              	parametro="idCidade="+args.row.idCidade;
 	            	//requisição para buscar dados
 	                  $.ajax({
 	   			           type: "POST",
-	   			           url: "/estadorest/buscarporid",
+	   			           url: "/cidaderest/buscarporid",
 	   			           data:  parametro, // serializes the form's elements.
 	   			           success: function(data)
 	   			           {       	    	
 	   			                	    
-	   			        	   $("#formEstado").deserialize(data)	;
-	   			        	ctrBotoes(false);
-	   			        	   
+	   			        	   $("#formCidade").deserialize(data)	;
+	   			        	   ctrBotoes(false);
+	   			        	   //acrescenta o valor no combo de cidade
+	   			        	   $("#estado\\.idEstado").val(data.estado.idEstado).change();
+	   			        	    
 	   			           }
 	   			         });
 	              	
 	           });   	
 	           function ctrBotoes(incluir){/*função para controlar os botões*/
-		   			$( "#btnIncluir" ).prop( "disabled",!incluir);
-		   			$( "#btnAlterar" ).prop( "disabled", incluir);
-		   			$( "#btnDeletar" ).prop( "disabled", incluir);
-		   			$( "#btnIncluir" ).css( "display", (incluir)?"":"none" );
-		   			$( "#btnAlterar" ).css( "display", (!incluir)?"":"none" );
-		   			$( "#btnDeletar" ).css( "display", (!incluir)?"":"none"  );	   			
-		       	   }
-	           ctrBotoes(true);
+	   			$( "#btnIncluir" ).prop( "disabled",!incluir);
+	   			$( "#btnAlterar" ).prop( "disabled", incluir);
+	   			$( "#btnDeletar" ).prop( "disabled", incluir);
+	   			$( "#btnIncluir" ).css( "display", (incluir)?"":"none" );
+	   			$( "#btnAlterar" ).css( "display", (!incluir)?"":"none" );
+	   			$( "#btnDeletar" ).css( "display", (!incluir)?"":"none"  );	   			
+	       	   }
+	   	       ctrBotoes(true);
+	              	
 			   $("#btnIncluir").click(function() {
 				    if(!confirm("Deseja realmente incluir?"))
 				    	return ;
 				    if(!validarForm())
 				    	return ;		
 				     //validar os dados
-			    	 //serializa idEstado=1&nome=DIego
-			    	 parametro=$("#formEstado").serialize();
+			    	 //serializa idCidade=1&nome=DIego
+			    	 parametro=$("#formCidade").serialize();
 				     //requisição
 			    	 $.ajax({
 				           type: "POST", 
-				           url:  "/estadorest/salvar",
+				           url:  "/cidaderest/salvar",
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
 				        	   if(resultado=='ok'){
 				        		   alert("Registro incluído com sucesso!");
-				        		   $("#formEstado")[0].reset();
+				        		   $("#formCidade")[0].reset();
 				        		   ctrBotoes(true);
 				        	   }else{
 				        		   alert("Não foi possível incluir!");
@@ -125,18 +129,18 @@
 				   if(!confirm("Deseja realmente alterar?"))
 				    	return ;			    	 
 				     //validar os dados
-			    	 //serializa idEstado=1&nome=DIego
-			    	 parametro=$("#formEstado").serialize();
+			    	 //serializa idCidade=1&nome=DIego
+			    	 parametro=$("#formCidade").serialize();
 				     //requisição
 			    	 $.ajax({
 				           type: "POST", 
-				           url:  "/estadorest/salvar",
+				           url:  "/cidaderest/salvar",
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
 				        	   if(resultado=='ok'){
 				        		   alert("Registro alterado com sucesso!");
-				        		   $("#formEstado")[0].reset();
+				        		   $("#formCidade")[0].reset();
 				        		   ctrBotoes(true);
 				        	   }else{
 				        		   alert("Não foi possível alterar!");
@@ -154,18 +158,18 @@
 				   if(!confirm("Deseja realmente excluir?"))
 				    	return ;			    	 
 				     //validar os dados
-			    	 //serializa idEstado=1&nome=Diego
-			    	 parametro="idEstado="+$("#idEstado").val();
+			    	 //serializa idCidade=1&nome=Diego
+			    	 parametro="idCidade="+$("#idCidade").val();
 				     //requisição
 			    	 $.ajax({
 				           type: "POST", 
-				           url:  "/estadorest/deletar",
+				           url:  "/cidaderest/deletar",
 				           data:  parametro, // serializes the form's elements.
 				           success: function(resultado)
 				           { 
 				        	   if(resultado=='ok'){
 				        		   alert("Registro deletado com sucesso!");
-				        		   $("#formEstado")[0].reset();
+				        		   $("#formCidade")[0].reset();
 				        		   ctrBotoes(true);
 				        	   }else{
 				        		   alert("Não foi possível deletar!");
@@ -182,44 +186,57 @@
 			   $("#btnLimpar").click(function() {
 				   if(!confirm("Deseja realmente limpar?"))
 				    	return ;
-			    	 $("#formEstado")[0].reset();
+			    	 $("#formCidade")[0].reset();
 			    	 ctrBotoes(true);
 			     });	
 			   $("#btnSair").click(function() {
 			    	 
 			     });	
+			   //carrega o combo de estado		 
+	           $.ajax({
+	                type: "GET",
+	                url: "/estadorest/lista",
+	                data: "",
+	                dataType: "json",
+	                success: function(json){
+	                   var options = "<option value=''>Selecione....</option>";
+	                   $.each(json, function(key, value){
+	                	   
+	                      options += '<option value="' + value.idEstado + '">' + value.nomeEstado + '</option>';
+	                   });
+	                   $("#estado\\.idEstado").html(options);
+	                }
+	             });
 			   function recarregarGrid(){
-				   $("#dataTableEstado").jqxDataTable('updateBoundData');
+				   $("#dataTableCidade").jqxDataTable('updateBoundData');
 			   }
 			  
 			   function validarForm(){
-				  var form= $("#formEstado");				  
 				   
-				  form.validate({
-					  rules: {
-						  	 nomeEstado: {required: true} ,
-						  	 sigla: {required: true} 
+					  var form= $("#formCidade");
+					  form.validate({
+						   rules: {
+							   nomeCidade: {required: true}
 						   },
 						   messages: {
-						     nomeEstado: "Informe o nome!",
-						     sigla: "Informe a sigla!"
+							   nomeCidade: "Informe o nome!"
 						   },
 						   tooltip_options: {
-							   nomeEstado: {placement: 'left',trigger:'focus'} 
-						   } ,
-					   errorElement: 'em',
-				       errorPlacement: function (error, element) {
-					    	   $('[data-toggle=\'tooltip\']').removeAttr('name');
-					    	   error.addClass('help-block');
-					    	   error.insertAfter(element);
-				            },
-				            highlight: function (element, errorClass, validClass) {
-				              $(element).parents('.col-md-12').addClass('has-error').removeClass('has-success');
-				            },
-				            unhighlight: function (element, errorClass, validClass) {
-				              $(element).parents('.col-md-12').addClass('has-success').removeClass('has-error');
-				            }
-				   });
+							   nomeCidade: {trigger: 'focus',placement: 'right'}
+						   },
+						   errorElement: 'em',
+					       errorPlacement: function (error, element) {
+						    	   $('[data-toggle=\'tooltip\']').removeAttr('name');
+						    	   error.addClass('help-block');
+						    	   error.insertAfter(element);
+					            },
+					            highlight: function (element, errorClass, validClass) {
+					              $(element).parents('.col-md-12').addClass('has-error').removeClass('has-success');
+					            },
+					            unhighlight: function (element, errorClass, validClass) {
+					              $(element).parents('.col-md-12').addClass('has-success').removeClass('has-error');
+					            }
+					   });
 				  return form.valid(); 
 			   }
 		   });
@@ -233,9 +250,9 @@
 	<body>
 		<div class="container">
 		<div class="card">
-		  <div class="card-header bg-primary text-white">Cadastro de Estado</div>
+		  <div class="card-header bg-primary text-white">Cadastro de Cidade</div>
 		  <div class="card-body">	
-			<form id="formEstado" name="formEstado">
+			<form id="formCidade" name="formCidade">
 			 <nav class="navbar navbar-default">
 			  <div class="container-fluid">
 			    <div class="navbar-header" style="margin-top:6px;">
@@ -259,20 +276,22 @@
 			  </div>
 			</nav>
 				<div class="form-group">				
-				   <label for="idEstado">ID</label> 
-				   <input type="text" class="form-control" id="idEstado"
-						name="idEstado" placeholder="ID" readonly="readonly"/>
+				   <label for="idCidade">ID</label> 
+				   <input type="text" class="form-control" id="idCidade"
+						name="idCidade" placeholder="ID" readonly="readonly"/>
 				</div>
 				<div class="form-group">
-					<label for="nomeEstado"><span class="req">*</span>Nome</label> 
-					<input type="text" class="form-control required informa" data-placement="bottom" id="nome"
-						name="nomeEstado" placeholder="Nome Estado"  required="required"  data-toggle='tooltip'  aria-required="true"/> 
+					<label for="nome"><span class="req">*</span>Nome</label> 
+					<input type="text" class="form-control required" data-placement="bottom" id="nomeCidade"
+						name="nomeCidade" placeholder="Nome"  required="required"/> 
 				</div>	
-				<div class="form-group">
-					<label for="sigla"><span class="req">*</span>Sigla</label> 
-					<input type="text" class="form-control required informa" data-placement="bottom" id="sigla"
-						name="sigla" placeholder="Sigla"  required="required"  data-toggle='tooltip'  aria-required="true"/> 
-				</div>	
+				 <div class="form-group">
+				<label>Estado:</label>
+				<select id="estado.idEstado" name="estado.idEstado" 
+				  class="form-control">
+				   
+				</select>
+			 </div> 
 				<div class="form-group">
 				<span class="req">*Campos de preenchimento obrigatório!</span>  
 				</div>			 
@@ -281,9 +300,9 @@
 			</div>
 		</div>	
 		<div class="card">
-		  <div class="card-header bg-primary text-white">Lista de Estados</div>
+		  <div class="card-header bg-primary text-white">Lista de Cidades</div>
 		  <div class="card-body">	
-			<div id="dataTableEstado">	</div>
+			<div id="dataTableCidade">	</div>
 		   </div>
 		 </div>
 		</div>

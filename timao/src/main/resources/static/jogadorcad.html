@@ -42,7 +42,8 @@
 	               dataType: "json",
 	               dataFields: [
 	                   { name: 'idJogador', type: 'int' },
-	                   { name: 'nome', type: 'string'  }	                  	                 
+	                   { name: 'nome', type: 'string'  },
+	                   { name: 'cidade', type: 'string' ,map: 'cidade>nomeCidade' }
 	               ],
 	               id: "idJogador",
 	               url: "/jogadorrest/lista"
@@ -58,7 +59,8 @@
 	               columnsResize: true,
 	               columns: [
 					  { text: 'ID', dataField: 'idJogador',cellsalign: 'right', width:"25%" },
-	                 { text: 'Nome', dataField: 'nome', width: "75%" }                
+	                 { text: 'Nome', dataField: 'nome', width: "50%" }  , 
+	                 { text: 'Cidade', dataField: 'cidade', width: "25%" } 
 	             ]
 	           });	
 	           
@@ -74,8 +76,9 @@
 	   			           {       	    	
 	   			                	    
 	   			        	   $("#formJogador").deserialize(data)	;
-	   			        	   ctrBotoes(false);
-	   			        	   
+	   			        	   ctrBotoes(false); //desativa o incluir- ativa o salvar e deletar  			        	 	   			        	    
+	   			        	    //atribui o valor no combo da cidade
+	   			        	   $("#cidade\\.idCidade").val(data.cidade.idCidade).change();
 	   			           }
 	   			         });
 	              	
@@ -188,6 +191,21 @@
 			   $("#btnSair").click(function() {
 			    	 
 			     });	
+			   //carrega o combo de estado		 
+	           $.ajax({
+	                type: "GET",
+	                url: "/cidaderest/lista",
+	                data: "",
+	                dataType: "json",
+	                success: function(json){
+	                   var options = "<option value=''>Selecione....</option>";
+	                   $.each(json, function(key, value){
+	                	   
+	                      options += '<option value="' + value.idCidade + '">' + value.nomeCidade + '</option>';
+	                   });
+	                   $("#cidade\\.idCidade").html(options);
+	                }
+	             });
 			   function recarregarGrid(){
 				   $("#dataTableJogador").jqxDataTable('updateBoundData');
 			   }
@@ -266,6 +284,13 @@
 					<input type="text" class="form-control required" data-placement="bottom" id="nome"
 						name="nome" placeholder="Nome"  required="required"/> 
 				</div>	
+				 <div class="form-group">
+				<label>Cidade:</label>
+				<select id="cidade.idCidade" name="cidade.idCidade" 
+				  class="form-control">
+				   
+				</select>
+			 </div> 
 				<div class="form-group">
 				<span class="req">*Campos de preenchimento obrigatório!</span>  
 				</div>			 

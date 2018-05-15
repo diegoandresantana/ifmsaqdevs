@@ -1,6 +1,7 @@
 package br.com.timao.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,8 @@ public class JogadorRestController {
 	 
 	@RequestMapping(value="/jogadorrest/lista",method = RequestMethod.GET)
 	public  List<Jogador>  getListaJogador() {
-		return (List<Jogador>) interJogadorDAO.findAll();
+		return (List<Jogador>) interJogadorDAO.findAll().stream()                
+                .collect(Collectors.toList());
 	}
 		
 	@RequestMapping(value="/jogadorrest/salvar",method = RequestMethod.POST)

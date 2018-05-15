@@ -1,12 +1,17 @@
 package br.com.timao.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cidade implements Serializable {
@@ -19,8 +24,19 @@ public class Cidade implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer  idCidade;	
 	private String  nomeCidade;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Estado estado;
+	@JsonIgnore
+	@OneToMany(mappedBy="cidade",fetch = FetchType.LAZY)
+	private List<Jogador> listaJogador;
+	
+	public List<Jogador> getListaJogador() {
+		return listaJogador;
+	}
+
+	public void setListaJogador(List<Jogador> listaJogador) {
+		this.listaJogador = listaJogador;
+	}
 
 	public Integer getIdCidade() {
 		return idCidade;
