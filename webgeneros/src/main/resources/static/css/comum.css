@@ -1,0 +1,108 @@
+
+		
+	@media screen and (max-width: 449px)  {
+		 
+		.endereco{
+			font-size:30%;
+			font-family: Courier;
+			color:#e9ecef;
+			text-align:center;
+		}
+	}
+
+	@media screen and (min-width: 450px) and (max-width: 1099px)  {
+		 
+		.endereco{
+			font-size:55%;
+			font-family: Courier;
+			color:#e9ecef;
+			text-align:center;
+		}
+	}
+	@media screen and (min-width: 1100px)  {
+	  
+		.endereco{
+			font-size:50%;
+			font-family: Courier;
+			color:#e9ecef;
+			text-align:center;
+		}
+		.nav-item{
+			font-size: 14px;
+			margin-left: 1px;
+			margin-right: 1px;
+			margin-top: 10px;
+		}
+		.icones{
+			width:20px;
+			height:20px;
+		}
+		.icones2{
+			width:20px;
+			height:20px;
+		}
+	}
+	.nav-item:hover{
+		text-shadow: 0px 1px 0px #423D3D;
+	}
+	.navbar-nav .active{
+		color: white;
+	}
+
+	.footer-basic-centered{
+		background-color: #AF4639;;
+		box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+		box-sizing: border-box;
+		width: 100%;
+		text-align: center;
+		font: normal 25px sans-serif;
+
+		padding: 15px;
+		margin-top: 40px;
+	}
+	 
+	.footer-basic-centered .footer-company-name{
+		color:   #ffffff;
+		font-size: 14px;
+		margin: 0;
+	}
+
+	.footer-basic-centered .footer-links{
+		list-style: none;
+		font-weight: bold;
+		color:  #ffffff;
+		padding: 25px 0 13px;
+		margin: 0;
+	}
+
+	.footer-basic-centered .footer-links a{
+		display:inline-block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	/* If you don't want the footer to be responsive, remove these media queries */
+
+	@media (max-width: 600px) {
+
+		.footer-basic-centered{
+			padding: 25px;
+		}
+
+		.footer-basic-centered .footer-company-motto{
+			font-size: 18px;
+		}
+
+		.footer-basic-centered .footer-company-name{
+			font-size: 12px;
+		}
+
+		.footer-basic-centered .footer-links{
+			font-size: 14px;
+			padding: 4px 0 7px;
+		}
+
+		.footer-basic-centered .footer-links a{
+			line-height: 1.8;
+		}
+	}
