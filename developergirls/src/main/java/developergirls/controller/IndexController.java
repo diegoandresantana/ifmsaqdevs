@@ -1,6 +1,5 @@
 package developergirls.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import developergirls.dao.inter.CategoriaInterDAO;
 import developergirls.dao.inter.MensagemInterDAO;
 import developergirls.dao.inter.NoticiaInterDAO;
-import developergirls.dao.inter.UsuarioInterDAO;
 import developergirls.entity.Categoria;
 import developergirls.entity.Mensagem;
 import developergirls.entity.Noticia;
-import developergirls.entity.Usuario;
 
 @RestController
 public class IndexController {
@@ -28,8 +25,7 @@ public class IndexController {
 	private MensagemInterDAO mensagemInterDAO;
 	@Autowired
 	private NoticiaInterDAO noticiaInterDAO;
-	@Autowired
-	private UsuarioInterDAO usuarioInterDAO;
+	 
 		 
 	@RequestMapping(value="/index/categorias",method = RequestMethod.GET)
 	public  Categoria  getCategoria() {
@@ -49,14 +45,7 @@ public class IndexController {
 		}
 		return "Mensagem não foi enviada!";
 	}
-	@RequestMapping(value="/index/logar",method = RequestMethod.POST)
-	public  String  logar(@Param("login") String login, @Param("senha")  String senha) {
-		if(login!=null) {
-			Usuario u=usuarioInterDAO.getByLogin(login);
-			System.out.println(u.getLogin());
-		}
-		return  "";
-	}
+	 
 	
 	@RequestMapping(value="/index/noticia/noticiasporcategoria",method = RequestMethod.GET)
 	public  List<Noticia>  getNoticiaPorCategoria(@Param("categoria") String categoria) {

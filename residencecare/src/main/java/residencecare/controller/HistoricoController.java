@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import residencecare.config.security.controller.BasicSecurityRestController;
 import residencecare.dao.inter.ChuvaInterDAO;
 import residencecare.dao.inter.LuminosidadeInterDAO;
 import residencecare.dao.inter.TemperaturaInterDAO;
@@ -17,7 +18,7 @@ import residencecare.entity.Temperatura;
 import residencecare.entity.Umidade;
 
 @RestController
-public class HistoricoController {
+public class HistoricoController  extends BasicSecurityRestController{
 	
 	@Autowired
 	private ChuvaInterDAO chuvaInterDAO;

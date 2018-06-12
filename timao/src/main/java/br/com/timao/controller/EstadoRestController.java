@@ -3,17 +3,19 @@ package br.com.timao.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.timao.config.security.controller.BasicSecurityRestController;
 import br.com.timao.dao.InterEstadoDAO;
 import br.com.timao.entity.Estado;
 
-  
+@EnableAutoConfiguration
 @RestController
-public class EstadoRestController {
+public class EstadoRestController extends BasicSecurityRestController{
 
 	@Autowired
 	private InterEstadoDAO interEstadoDAO;

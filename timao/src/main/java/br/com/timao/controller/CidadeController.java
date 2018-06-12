@@ -32,8 +32,8 @@ public class CidadeController {
 			modelAndView.addObject("comboEstado", interEstadoDAO.findAll());
 			modelAndView.addObject("cidade", 
 					(j!=null && j.getNomeCidade()!=null)
-					?j:new Cidade());
-			interEstadoDAO.save(new Estado(1,"Mato Grosso","MS"));
+					?j:new Cidade()); 
+			interEstadoDAO.save( new Estado(1,"Mato Grosso","MS"));
 			return modelAndView;		 
 	}
 	@PostMapping("/cidade/salvar")

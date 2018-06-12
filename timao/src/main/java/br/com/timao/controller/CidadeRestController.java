@@ -3,22 +3,19 @@ package br.com.timao.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.timao.dao.DAOGeneric;
+import br.com.timao.config.security.controller.BasicSecurityRestController;
 import br.com.timao.dao.InterCidadeDAO;
 import br.com.timao.entity.Cidade;
 
   
 @RestController
-public class CidadeRestController {
+public class CidadeRestController  extends BasicSecurityRestController{
 	 
 	@Autowired
 	private InterCidadeDAO interCidadeDAO;

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Estado implements Serializable{
-
+  
  
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -29,12 +29,13 @@ public class Estado implements Serializable{
 		
 	}
 	
-	public Estado(int idEstado, String nomeEstado, String sigla) {
+	public Estado(Integer idEstado, String nomeEstado, String sigla) {
 		this.idEstado=idEstado;
 		this.nomeEstado=nomeEstado;
 		this.sigla=sigla;
 	}
 
+	 
 	public String getSigla() {
 		return sigla;
 	}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Mensagens</title>
+		 <!-- jQuery library -->
+		   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+			<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css"
+			type="text/css" />
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+		<!-- Core JQWidgets -->
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxcore.js"></script>
+		<!-- DataTables JQWidgets -->
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxbuttons.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxscrollbar.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxdata.js"></script>
+		<script type="text/javascript" src="https://jqwidgets.com/public/jqwidgets/jqxdatatable.js"></script>
+		
+		<!-- deserializacao -->
+		<script type="text/javascript" src="../js/jquery.deserialize.js"></script>
+		<!-- BootStrap -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+		
+		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+		<!-- Validação 
+		<script 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+		<script 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script> -->
+			
+		 <script 	src="../js/jquery.validate-1.14.0.min.js"></script>
+		<script 	src="../js/jquery-validate.bootstrap-tooltip.js"></script>
+		 <script 	src="../js/restrito.js"></script>
+		<script type="text/javascript">
+		   $( document ).ready(function() {
+			   $('[data-toggle="tooltip"]').tooltip( {animation: true, placement: 'bottom', trigger: 'focus'});
+			   //Data Table
+			   var source =
+	           {
+	               dataType: "json",
+	               headers: createAuthorizationTokenHeader(),
+	               dataFields: [
+	                   { name: 'idMensagem', type: 'int' },
+	                   { name: 'nome', type: 'string'  } ,
+	                   { name: 'texto', type: 'string'  } 	 ,
+	                   { name: 'email', type: 'string'  } ,
+	                   { name: 'celular', type: 'string'  } 	 
+	                    
+	               ],
+	               id: "idMensagem",
+	               url: "/mensagemrest/lista"
+	           };
+	           var dataAdapter = new $.jqx.dataAdapter(source);
+	           $("#dataTableMensagem").jqxDataTable(
+	           {
+	               width: "100%" ,
+	               pageable: true,
+	               sortable: true,
+	               pagerButtonsCount: 10,
+	               source: dataAdapter,
+	               columnsResize: true,
+	               columns: [
+					  { text: 'ID', dataField: 'idMensagem',cellsalign: 'right', width:"25%" },
+	                 { text: 'Nome', dataField: 'nome', width: "50%" } ,
+	                 { text: 'Texto', dataField: 'texto', width: "50%" } ,
+	                 { text: 'E-mail', dataField: 'email', width: "50%" } ,
+	                 { text: 'Celular', dataField: 'celular', width: "50%" } 
+					 
+	           });	
+	           
+	           $("#dataTableMensagem").on('rowSelect', function (event) {
+	              	var args = event.args;// event arguments
+	              	parametro="idMensagem="+args.row.idMensagem;
+	            	//requisição para buscar dados
+	                  $.ajax({
+	   			           type: "POST",
+	   			           url: "/mensagemrest/buscarporid",
+	   			           data:  parametro, // serializes the form's elements.
+	   			           headers: createAuthorizationTokenHeader(),
+	   			           success: function(data)
+	   			           {       	    	
+	   			                	    
+	   			        	   $("#formMensagem").deserialize(data)	;
+	   			        	   ctrBotoes(false);
+	   			        	   //acrescenta o valor no combo de cidade
+	   			        	   $("#estado\\.idEstado").val(data.estado.idEstado).change();
+	   			        	    
+	   			           }
+	   			         });
+	              	
+	           });   	
+	           function ctrBotoes(incluir){/*função para controlar os botões*/
+	   			 $( "#btnDeletar" ).prop( "disabled", incluir);	   	 
+	   			$( "#btnDeletar" ).css( "display", (!incluir)?"":"none"  );	   			
+	       	   }
+	   	       ctrBotoes(true);
+	              	
+			   
+			    	
+			   $("#btnDeletar").click(function() {
+				   if(!confirm("Deseja realmente excluir?"))
+				    	return ;			    	 
+				     //validar os dados
+			    	 //serializa idMensagem=1&nome=Diego
+			    	 parametro="idMensagem="+$("#idMensagem").val();
+				     //requisição
+			    	 $.ajax({
+				           type: "POST", 
+				           url:  "/mensagemrest/deletar",
+				           data:  parametro, // serializes the form's elements.
+				           headers: createAuthorizationTokenHeader(),
+				           success: function(resultado)
+				           { 
+				        	   if(resultado=='ok'){
+				        		   alert("Registro deletado com sucesso!");
+				        		   $("#formMensagem")[0].reset();
+				        		   ctrBotoes(true);
+				        	   }else{
+				        		   alert("Não foi possível deletar!");
+				        	   }			        	   
+				        	   
+				        	   recarregarGrid();
+				           },
+				           error:function(xhr, erro){
+				        	   alert("Não foi possível deletar!");
+				        	   console.debug(xhr); console.debug(error);
+				           }
+				         });
+			     });	
+			   $("#btnLimpar").click(function() {
+				   if(!confirm("Deseja realmente limpar?"))
+				    	return ;
+			    	 $("#formMensagem")[0].reset();
+			    	 ctrBotoes(true);
+			     });	
+			   $("#btnSair").click(function() {
+			    	 
+			     });	
+			  
+			   function recarregarGrid(){
+				   $("#dataTableMensagem").jqxDataTable('updateBoundData');
+			   }
+			  
+			   function validarForm(){
+				   
+					  var form= $("#formMensagem");
+					  form.validate({
+						   rules: {
+							   nome: {required: true}
+						   },
+						   messages: {
+							   nome: "Informe o nome!"
+						   },
+						   tooltip_options: {
+							   nome: {trigger: 'focus',placement: 'right'}
+						   },
+						   errorElement: 'em',
+					       errorPlacement: function (error, element) {
+						    	   $('[data-toggle=\'tooltip\']').removeAttr('name');
+						    	   error.addClass('help-block');
+						    	   error.insertAfter(element);
+					            },
+					            highlight: function (element, errorClass, validClass) {
+					              $(element).parents('.col-md-12').addClass('has-error').removeClass('has-success');
+					            },
+					            unhighlight: function (element, errorClass, validClass) {
+					              $(element).parents('.col-md-12').addClass('has-success').removeClass('has-error');
+					            }
+					   });
+				  return form.valid(); 
+			   }
+		   });
+		</script>
+		<style>
+		   .req{
+		    	color:red;
+		   }
+		   body{background-color:#eee;}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		<div class="card">
+		  <div class="card-header bg-dark text-white">Cadastro de Mensagem</div>
+		  <div class="card-body">	
+			<form id="formMensagem" name="formMensagem">
+			 <nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header" style="margin-top:6px;">
+			    
+					<button type="button"   id="btnDeletar"  title="Botão Deletar!!">
+					     <img src="../imagens/btnDeletar.png" />
+					</button>
+					<button type="button"  id="btnLimpar"  title="Botão Limpar!!">
+						<img src="../imagens/btnLimpar.png" />
+					</button>
+					<button type="button"  id="btnSair"  title="Botão Sair!!" 
+					onclick="javascript:location.href='index.html'">
+						<img src="../imagens/btnSair.png" />
+					</button>
+			    </div>
+			  </div>
+			</nav>
+				<div class="form-group">				
+				   <label for="idMensagem">ID</label> 
+				   <input type="text" class="form-control" id="idMensagem"
+						name="idMensagem" placeholder="ID" readonly="readonly"/>
+				</div>
+				<div class="form-group">
+					<label for="nome"><span class="req">*</span>Nome</label> 
+					<input type="text" class="form-control required" data-placement="bottom" id="nome"
+						name="nome" placeholder="Nome"  required="required" readonly="readonly"/> 
+				</div>
+				<div class="form-group">
+					<label for="email"><span class="req">*</span>E-mail</label> 
+					<input type="text" class="form-control required" data-placement="bottom" id="email"
+						name="email" placeholder="E-mail"  required="required" readonly="readonly"/> 
+				</div>	
+				<div class="form-group">
+					<label for="celular"><span class="req">*</span>Celular</label> 
+					<input type="text" class="form-control required" data-placement="bottom" id="celular"
+						name="celular" placeholder="Celular"  required="required" readonly="readonly"/> 
+				</div>		
+				 <div class="form-group">
+					<label for="celular"><span class="req">*</span>Celular</label> 
+					<textarea   class="form-control required" data-placement="bottom" id="texto"
+						name="texto"    required="required" readonly="readonly">
+						</textarea>
+				</div>
+				<div class="form-group">
+				<span class="req">*Campos de preenchimento obrigatório!</span>  
+				</div>			 
+			</form>
+			
+			</div>
+		</div>	
+		<div class="card">
+		  <div class="card-header bg-dark text-white">Lista de Mensagens</div>
+		  <div class="card-body">	
+			<div id="dataTableMensagem">	</div>
+		   </div>
+		 </div>
+		</div>
+	</body>
+</html>
