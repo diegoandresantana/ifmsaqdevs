@@ -1,0 +1,35 @@
+ 
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .300rem .75rem !important;
+    border: 1px solid #DB7190;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.container{
+	margin-top: 20px;
+	width: 80%;
+	text-align: center;
+}
+ 
+.card .container{
+	text-align: left;
+}
+.w3-row-padding{
+    margin-bottom: 20px;
+}
+.error{
+    color: red;
+}
+input:focus,  textarea:focus {
+border: 1px solid pink !important;
+box-shadow: 0 0 3px pink !important;
+-moz-box-shadow: 0 0 3px pink !important;
+-webkit-box-shadow: 0 0 3px pink !important;
+}
+
+input:focus, textarea:focus, select:focus {
+outline-offset: 0px !important;
+outline: none !important;
+}

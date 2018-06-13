@@ -1,0 +1,49 @@
+/* Full height image header */
+
+.bgimg-1 {
+    
+background-position: center;
+background-size: cover;
+background-image: url("../img/logo.png");
+min-height: 90%;
+margin-top: 0%;	
+margin-bottom:20px;
+
+}
+ 
+.logo{  
+width:160px;  
+height:60px;
+}
+
+.circulos{  
+width: 50%;  
+height: 40%;
+}
+
+.w3-bar .w3-button {    
+padding: 10px;
+text-align: center;
+
+}
+.w3-wide {
+    
+letter-spacing: 5px;
+
+}
+.w3-button{
+    margin-top: 2px;
+    vertical-align: middle;
+    width: 60px;
+    height: 40px;
+}
+
+.jumbotron {
+    border-radius: .3rem;
+    text-align: center;
+}
+
+.w3-row-padding{
+    margin-bottom: 20px;
+}
+

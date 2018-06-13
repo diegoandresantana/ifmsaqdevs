@@ -1,0 +1,29 @@
+.conteudo{
+    font-size: 18px;
+    text-align: justify;
+    font-family: Arial;
+} 
+
+.w3-bar .w3-button {
+    
+padding: 10px;
+text-align: center;
+
+}
+.w3-wide {
+    
+letter-spacing: 5px;
+
+}
+.w3-button{
+    margin-top: 2px;
+    vertical-align: middle;
+    width: 60px;
+    height: 40px;
+}
+ 
+ 
+ .w3-row-padding{
+     margin-bottom: 20px;
+ }
+  

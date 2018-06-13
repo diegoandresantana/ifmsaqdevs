@@ -77,9 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             //.antMatchers("/h2-console/**/**").permitAll()
 
             .antMatchers("/auth/**").permitAll()
-            .antMatchers("/cidaderest/**").permitAll() 
-            .antMatchers("/jogadorrest/**").permitAll()  
-            .antMatchers("/estadorest/**").permitAll() 
+            .antMatchers("/mensagemrest/**").permitAll() 
+            .antMatchers("/index/**").permitAll()  
+            
             .anyRequest().authenticated()
            
            
@@ -116,7 +116,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/*.html",
                 "/js/*",
                 "/css/*",
-                "/imagens/*",
+                "/img/*",
                 "/favicon.ico",
                 //"/**/*.html",
                 "/**/*.css",

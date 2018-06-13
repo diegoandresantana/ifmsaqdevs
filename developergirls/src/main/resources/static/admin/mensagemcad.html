@@ -42,10 +42,11 @@
 	               headers: createAuthorizationTokenHeader(),
 	               dataFields: [
 	                   { name: 'idMensagem', type: 'int' },
+	                   { name: 'dataMensagem', type: 'string'  } 	,
 	                   { name: 'nome', type: 'string'  } ,
 	                   { name: 'texto', type: 'string'  } 	 ,
-	                   { name: 'email', type: 'string'  } ,
-	                   { name: 'celular', type: 'string'  } 	 
+	                   { name: 'email', type: 'string'  } 
+	                    
 	                    
 	               ],
 	               id: "idMensagem",
@@ -62,11 +63,12 @@
 	               columnsResize: true,
 	               columns: [
 					  { text: 'ID', dataField: 'idMensagem',cellsalign: 'right', width:"25%" },
+					  { text: 'Data da Mensagem', dataField: 'dataMensagem', width: "50%" } ,
 	                 { text: 'Nome', dataField: 'nome', width: "50%" } ,
 	                 { text: 'Texto', dataField: 'texto', width: "50%" } ,
-	                 { text: 'E-mail', dataField: 'email', width: "50%" } ,
-	                 { text: 'Celular', dataField: 'celular', width: "50%" } 
-					 
+	                 { text: 'E-mail', dataField: 'email', width: "50%" } 
+	                
+					 ]
 	           });	
 	           
 	           $("#dataTableMensagem").on('rowSelect', function (event) {
@@ -101,8 +103,7 @@
 			   $("#btnDeletar").click(function() {
 				   if(!confirm("Deseja realmente excluir?"))
 				    	return ;			    	 
-				     //validar os dados
-			    	 //serializa idMensagem=1&nome=Diego
+				    
 			    	 parametro="idMensagem="+$("#idMensagem").val();
 				     //requisição
 			    	 $.ajax({
@@ -142,34 +143,7 @@
 				   $("#dataTableMensagem").jqxDataTable('updateBoundData');
 			   }
 			  
-			   function validarForm(){
-				   
-					  var form= $("#formMensagem");
-					  form.validate({
-						   rules: {
-							   nome: {required: true}
-						   },
-						   messages: {
-							   nome: "Informe o nome!"
-						   },
-						   tooltip_options: {
-							   nome: {trigger: 'focus',placement: 'right'}
-						   },
-						   errorElement: 'em',
-					       errorPlacement: function (error, element) {
-						    	   $('[data-toggle=\'tooltip\']').removeAttr('name');
-						    	   error.addClass('help-block');
-						    	   error.insertAfter(element);
-					            },
-					            highlight: function (element, errorClass, validClass) {
-					              $(element).parents('.col-md-12').addClass('has-error').removeClass('has-success');
-					            },
-					            unhighlight: function (element, errorClass, validClass) {
-					              $(element).parents('.col-md-12').addClass('has-success').removeClass('has-error');
-					            }
-					   });
-				  return form.valid(); 
-			   }
+			  
 		   });
 		</script>
 		<style>
@@ -190,14 +164,14 @@
 			    <div class="navbar-header" style="margin-top:6px;">
 			    
 					<button type="button"   id="btnDeletar"  title="Botão Deletar!!">
-					     <img src="../imagens/btnDeletar.png" />
+					     <img src="../img/btnDeletar.png" />
 					</button>
 					<button type="button"  id="btnLimpar"  title="Botão Limpar!!">
-						<img src="../imagens/btnLimpar.png" />
+						<img src="../img/btnLimpar.png" />
 					</button>
 					<button type="button"  id="btnSair"  title="Botão Sair!!" 
 					onclick="javascript:location.href='index.html'">
-						<img src="../imagens/btnSair.png" />
+						<img src="../img/btnSair.png" />
 					</button>
 			    </div>
 			  </div>
@@ -206,6 +180,11 @@
 				   <label for="idMensagem">ID</label> 
 				   <input type="text" class="form-control" id="idMensagem"
 						name="idMensagem" placeholder="ID" readonly="readonly"/>
+				</div>
+				<div class="form-group">
+					<label for="dataMensagem"><span class="req">*</span>Data/Hora da Mensagem</label> 
+					<input type="text" class="form-control required" data-placement="bottom" id="dataMensagem"
+						name="dataMensagem" placeholder="Data da Mensagem"  required="required" readonly="readonly"/> 
 				</div>
 				<div class="form-group">
 					<label for="nome"><span class="req">*</span>Nome</label> 
@@ -223,7 +202,7 @@
 						name="celular" placeholder="Celular"  required="required" readonly="readonly"/> 
 				</div>		
 				 <div class="form-group">
-					<label for="celular"><span class="req">*</span>Celular</label> 
+					<label for="texto"><span class="req">*</span>Texto</label> 
 					<textarea   class="form-control required" data-placement="bottom" id="texto"
 						name="texto"    required="required" readonly="readonly">
 						</textarea>

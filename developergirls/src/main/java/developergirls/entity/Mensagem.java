@@ -24,8 +24,9 @@ public class Mensagem implements Serializable {
 	private String nome;
 	private String email;
 	private String celular;
-	@Column(columnDefinition = "DATE DEFAULT CURRENT_DATE")
+	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@Temporal(TemporalType.TIMESTAMP)
+	@org.hibernate.annotations.Generated(org.hibernate.annotations.GenerationTime.INSERT)
 	private Date dataMensagem;
 
 	public String getNome() {

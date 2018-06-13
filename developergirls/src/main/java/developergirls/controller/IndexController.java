@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import developergirls.dao.inter.CategoriaInterDAO;
-import developergirls.dao.inter.MensagemInterDAO;
-import developergirls.dao.inter.NoticiaInterDAO;
+import developergirls.dao.inter.InterCategoriaDAO;
+import developergirls.dao.inter.InterMensagemDAO;
+import developergirls.dao.inter.InterNoticiaDAO;
 import developergirls.entity.Categoria;
 import developergirls.entity.Mensagem;
 import developergirls.entity.Noticia;
@@ -20,25 +20,25 @@ import developergirls.entity.Noticia;
 public class IndexController {
 	
 	@Autowired
-	private CategoriaInterDAO categoriaInterDAO;
+	private InterCategoriaDAO interCategoriaDAO;
 	@Autowired
-	private MensagemInterDAO mensagemInterDAO;
+	private InterMensagemDAO interMensagemDAO;
 	@Autowired
-	private NoticiaInterDAO noticiaInterDAO;
+	private InterNoticiaDAO interNoticiaDAO;
 	 
 		 
 	@RequestMapping(value="/index/categorias",method = RequestMethod.GET)
 	public  Categoria  getCategoria() {
-		return (Categoria) categoriaInterDAO.findAll(new Sort(Sort.Direction.ASC, "nomeCategoria")) ;
+		return (Categoria) interCategoriaDAO.findAll(new Sort(Sort.Direction.ASC, "nomeCategoria")) ;
 	}
 	@RequestMapping(value="/index/ultimasnoticias",method = RequestMethod.GET)
 	public  Categoria  getUltimaNoticia() {
-		return (Categoria) categoriaInterDAO.findAll(new Sort(Sort.Direction.DESC, "dataPublicacao")) ;
+		return (Categoria) interCategoriaDAO.findAll(new Sort(Sort.Direction.DESC, "dataPublicacao")) ;
 	}
 	@RequestMapping(value="/index/mensagem/salvar",method = RequestMethod.POST)
 	public  String  salvarMensagem(Mensagem m) {
 		 
-		Mensagem ms=mensagemInterDAO.save(m);
+		Mensagem ms=interMensagemDAO.save(m);
 		
 		if(ms!=null && ms.getIdMensagem()!=null) {
 			return "Mensagem enviada!";
@@ -49,7 +49,7 @@ public class IndexController {
 	
 	@RequestMapping(value="/index/noticia/noticiasporcategoria",method = RequestMethod.GET)
 	public  List<Noticia>  getNoticiaPorCategoria(@Param("categoria") String categoria) {
-		return  noticiaInterDAO.findAll(new Sort(Sort.Direction.DESC, "dataPublicacao")) ;
+		return  interNoticiaDAO.findAll(new Sort(Sort.Direction.DESC, "dataPublicacao")) ;
 	}
 	
 	 
