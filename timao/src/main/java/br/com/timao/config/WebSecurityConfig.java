@@ -64,8 +64,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
     	 
-    	 httpSecurity.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
-    	 httpSecurity.exceptionHandling().accessDeniedPage("/index.html");
+    	httpSecurity.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
+    	httpSecurity.exceptionHandling().accessDeniedPage("/index.html");
         httpSecurity
             // we don't need CSRF because our token is invulnerable
             .csrf().disable()

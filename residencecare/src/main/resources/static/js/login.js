@@ -34,7 +34,7 @@ $(document).ready(function ( ) {
 			                	 alert("Login ou senha estão incorretos");
 			                }else{
 			                	alert("Logado com sucesso!");
-			                	window.location="/admin/index.html";
+			                	window.location="/admin/dashboard.html";
 			                	
 			                }
 			            },

@@ -55,13 +55,14 @@ setInterval(function () {
 	atualizaGraficoChuva();
 	atualizaGraficoUmidade();
 	atualizaGraficoLuminosidade();
-}, 2000);
+}, 5000);
 
 function atualizaGraficoTemperatura(){	
 	$.ajax({
 	    type: "GET",
 	    url: "/dashboard/temperaturaAtual",
 	    data: "",
+	    headers:createAuthorizationTokenHeader(),
 	    dataType: "json",
 	    success: function(json){
 	        var temp;        
@@ -84,6 +85,7 @@ function atualizaGraficoChuva(){
 	    type: "GET",
 	    url: "/dashboard/chuvaAtual",
 	    data: "",
+	    headers:createAuthorizationTokenHeader(),
 	    dataType: "json",
 	    success: function(json){
 	        var chuv;        
@@ -105,6 +107,7 @@ function atualizaGraficoUmidade(){
 	    type: "GET",
 	    url: "/dashboard/umidadeAtual",
 	    data: "",
+	    headers:createAuthorizationTokenHeader(),
 	    dataType: "json",
 	    success: function(json){
 	        var umi;        
@@ -126,6 +129,7 @@ function atualizaGraficoLuminosidade(){
 		    type: "GET",
 		    url: "/dashboard/luminosidadeAtual",
 		    data: "",
+		    headers:createAuthorizationTokenHeader(),
 		    dataType: "json",
 		    success: function(json){
 		        var lum;        

@@ -20,20 +20,38 @@
 		<script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
 		
 		<script src="../js/graficos.js"></script>
+		<script src="../js/restrito.js"></script>
 		<script>
 		
 		$(document).ready(function() {
 			notificacao();
-				setInterval(function(){ notificacao(); }, 10000);
+				setInterval(function(){ notificacao(); }, 60000);
 			});
 		    function manterLigado() {
 		    	$.ajax(
 						{
 							url : "/equipamento/desativarprevencao",
 							type: "GET",
+							headers:createAuthorizationTokenHeader(),
 							success: function(data, textStatus, jqXHR)
 							{
 							  alert("Sistema de prevenção desativado!!!");
+							},
+							error: function(jqXHR, textStatus, errorThrown)
+							{
+			
+							}
+						});			    	
+		    }
+		    function desligar() {
+		    	$.ajax(
+						{
+							url : "/equipamento/desligar",
+							type: "GET",
+							headers:createAuthorizationTokenHeader(),
+							success: function(data, textStatus, jqXHR)
+							{
+							  alert("Sistema desligado!!!");
 							},
 							error: function(jqXHR, textStatus, errorThrown)
 							{
@@ -53,6 +71,7 @@
 					{
 						url : "/equipamento/alerta",
 						type: "GET",
+						headers:createAuthorizationTokenHeader(),
 						success: function(data, textStatus, jqXHR)
 						{
 							 
@@ -63,12 +82,15 @@
 										body: ' Para manter ligado os equipamentos clique aqui!!' 
 									});
 									notifikasi.onclick = function () {
-										 manterLigado();
+										manterLigado();
 										notifikasi.close();     
 									};
 									setTimeout(function(){
+										desligar();
 										notifikasi.close();
-									}, 5000);
+										
+										
+									}, 60000);
 								 
 							}else{
 		

@@ -3,6 +3,8 @@ package residencecare.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,22 +33,23 @@ public class HistoricoController  extends BasicSecurityRestController{
 		 
 	@RequestMapping(value="/historico/historicoTemperatura",method = RequestMethod.GET)
 	public  List<Temperatura>  getTemperaturaLista() {
-		return (List<Temperatura>) temperaturaInterDAO.findAll();
+		return (List<Temperatura>) temperaturaInterDAO.findAll(new Sort(Direction.DESC, "dataHora"));
+	}
+	@RequestMapping(value="/historico/historicoChuva",method = RequestMethod.GET)
+	public  List<Chuva>  getChuvaLista() {
+		return (List<Chuva>) chuvaInterDAO.findAll(new Sort(Direction.DESC, "dataHora"));
+				 
 	}
 	
-	@RequestMapping(value="/historico/historicochuva",method = RequestMethod.GET)
-	public  Chuva  getChuvaAtual() {
-		return (Chuva) chuvaInterDAO.lastItem();
+	@RequestMapping(value="/historico/historicoUmidade",method = RequestMethod.GET)
+	public  List<Umidade>  getUmidadeLista() {
+		return (List<Umidade>) umidadeInterDAO.findAll(new Sort(Direction.DESC, "dataHora"));
 	}
 	
-	@RequestMapping(value="/historico/umidade",method = RequestMethod.GET)
-	public  Umidade getUmidadeAtual() {
-		return (Umidade) umidadeInterDAO.lastItem();
+	@RequestMapping(value="/historico/historicoLuminosidade",method = RequestMethod.GET)
+	public  List<Luminosidade>  getLuminosidadeLista() {
+		return (List<Luminosidade>) luminosidadeInterDAO.findAll(new Sort(Direction.DESC, "dataHora"));
 	}
-	
-	@RequestMapping(value="/historico/luminosidadeAtual",method = RequestMethod.GET)
-	public  Luminosidade  getLuminosidadeAtual() {
-		return (Luminosidade) luminosidadeInterDAO.lastItem();
-	}
+	 
 	 
 }

@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import residencecare.dao.inter.ChuvaInterDAO;
+import residencecare.dao.inter.ControleEstadoInterDAO;
 import residencecare.dao.inter.LuminosidadeInterDAO;
 import residencecare.dao.inter.TemperaturaInterDAO;
 import residencecare.dao.inter.UmidadeInterDAO;
 import residencecare.entity.Chuva;
+import residencecare.entity.ControleEstado;
 import residencecare.entity.Luminosidade;
 import residencecare.entity.Temperatura;
 import residencecare.entity.Umidade;
@@ -25,7 +27,9 @@ public class ArduinoController {
 	private TemperaturaInterDAO temperaturaInterDAO;
 	@Autowired
 	private LuminosidadeInterDAO luminosidadeInterDAO;
-			 
+	@Autowired
+	private ControleEstadoInterDAO controleEstadoInterDAO;
+	
 	@RequestMapping(value="/arduino/salvarchuva",method = RequestMethod.GET)
 	public  String salvarChuva(Chuva c) {
 		Chuva o=chuvaInterDAO.save(c);
@@ -66,5 +70,10 @@ public class ArduinoController {
 			return "erro";
 		}		 
 	}
+	
 	 
+	@RequestMapping(value="/arduino/status",method = RequestMethod.GET)
+	public  ControleEstado  getTemperaturaAtual() {
+		return (ControleEstado) controleEstadoInterDAO.findOne(1);
+	}
 }

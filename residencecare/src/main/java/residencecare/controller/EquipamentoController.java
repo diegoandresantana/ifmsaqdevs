@@ -27,10 +27,7 @@ public class EquipamentoController  extends BasicSecurityRestController{
 	@Autowired
 	private ControleEstadoInterDAO controleEstadoInterDAO;
 	 
-	@RequestMapping(value="/equipamento/status",method = RequestMethod.GET)
-	public  ControleEstado  getTemperaturaAtual() {
-		return (ControleEstado) controleEstadoInterDAO.findOne(1);
-	}
+	 
 	@RequestMapping(value="/equipamento/alterarRele",method = RequestMethod.POST)
 	public  String   getAlterarRele(@Param("idControleEstado") Integer idControleEstado,@Param("valor") boolean valor,
 			@Param("numeroRele") Integer numeroRele) {
@@ -86,6 +83,7 @@ public class EquipamentoController  extends BasicSecurityRestController{
 		Umidade u = umidadeInterDAO.lastItem();
 	    Chuva c=chuvaInterDAO.lastItem();
 		if((c.getDado()>70 && u.getDado()>90) ||  c.getDado()>=91) {
+			 
 			return true;
 		}else {
 			return false ;
@@ -107,14 +105,15 @@ public class EquipamentoController  extends BasicSecurityRestController{
 	@RequestMapping(value="/equipamento/desligar",method = RequestMethod.GET)
 	public  void desligar() {
 		ControleEstado c=controleEstadoInterDAO.findOne(1);
-		c.setPorta1(true);
-		c.setPorta2(true);
-		c.setPorta3(true);
-		c.setPorta4(true);
-		c.setPorta5(true);
-		c.setPorta6(true);
-		c.setPorta7(true);
-		c.setPorta8(true);
+		c.setPorta1(false);
+		c.setPorta2(false);
+		c.setPorta3(false);
+		c.setPorta4(false);
+		c.setPorta5(false);
+		c.setPorta6(false);
+		c.setPorta7(false);
+		c.setPorta8(false);
+		 
 		controleEstadoInterDAO.save(c);
 	}
 	 

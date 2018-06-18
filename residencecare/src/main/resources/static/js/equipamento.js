@@ -1,11 +1,12 @@
-$( document ).ready(function() {
+  $( document ).ready(function() {
 	
 	function atualizarStatus(){
 		$.ajax({
 		    type: "GET",
-		    url: "/equipamento/status",
+		    url: "/arduino/status",
 		    data: "",
 		    dataType: "json",
+		    headers:createAuthorizationTokenHeader(),
 		    success: function(json){
 		    	
 		    	  obj=eval(json);
@@ -23,16 +24,116 @@ $( document ).ready(function() {
 	}
 	atualizarStatus();
 	$("#rele1").click(function() {
-		//if(!confirm("Deseja realmente desligar o equipamento?")) return;
-		//valor botao
-		//confirm
-		//requisição
 		 
 		$.ajax({
 		    type: "POST",
 		    url: "/equipamento/alterarRele",
 		    data: "idControleEstado=1&numeroRele=1&valor="+$("#rele1").prop( "checked" ),
+		    headers:createAuthorizationTokenHeader(),
 		    dataType: "json",
+		    success: function(json){
+		    	  atualizarStatus();		    	              
+		        }		     
+		 });	 
+		
+	});
+	$("#rele2").click(function() {
+		 
+		 
+		$.ajax({
+		    type: "POST",
+		    url: "/equipamento/alterarRele",
+		    data: "idControleEstado=1&numeroRele=2&valor="+$("#rele2").prop( "checked" ),
+		    headers:createAuthorizationTokenHeader(),
+		    dataType: "json",
+		    success: function(json){
+		    	  atualizarStatus();		    	              
+		        }		     
+		 });	 
+		
+	});
+	$("#rele3").click(function() {
+	 
+		 
+		$.ajax({
+		    type: "POST",
+		    url: "/equipamento/alterarRele",
+		    data: "idControleEstado=1&numeroRele=3&valor="+$("#rele3").prop( "checked" ),
+		    dataType: "json",
+		    headers:createAuthorizationTokenHeader(),
+		    success: function(json){
+		    	  atualizarStatus();		    	              
+		        }		     
+		 });	 
+		
+	});
+	$("#rele4").click(function() {
+		 
+		$.ajax({
+		    type: "POST",
+		    url: "/equipamento/alterarRele",
+		    data: "idControleEstado=1&numeroRele=4&valor="+$("#rele4").prop( "checked" ),
+		    dataType: "json",
+		    headers:createAuthorizationTokenHeader(),
+		    success: function(json){
+		    	  atualizarStatus();		    	              
+		        }		     
+		 });	 
+		
+	});
+	$("#rele5").click(function() {
+		 
+		 
+		$.ajax({
+		    type: "POST",
+		    url: "/equipamento/alterarRele",
+		    data: "idControleEstado=1&numeroRele=5&valor="+$("#rele5").prop( "checked" ),
+		    dataType: "json",
+		    headers:createAuthorizationTokenHeader(),
+		    success: function(json){
+		    	  atualizarStatus();		    	              
+		        }		     
+		 });	 
+		
+	});
+	$("#rele6").click(function() {
+		 
+		 
+		$.ajax({
+		    type: "POST",
+		    url: "/equipamento/alterarRele",
+		    data: "idControleEstado=1&numeroRele=6&valor="+$("#rele6").prop( "checked" ),
+		    dataType: "json",
+		    headers:createAuthorizationTokenHeader(),
+		    success: function(json){
+		    	  atualizarStatus();		    	              
+		        }		     
+		 });	 
+		
+	});
+	$("#rele7").click(function() {
+		 
+		 
+		$.ajax({
+		    type: "POST",
+		    url: "/equipamento/alterarRele",
+		    data: "idControleEstado=1&numeroRele=7&valor="+$("#rele7").prop( "checked" ),
+		    dataType: "json",
+		    headers:createAuthorizationTokenHeader(),
+		    success: function(json){
+		    	  atualizarStatus();		    	              
+		        }		     
+		 });	 
+		
+	});
+	$("#rele8").click(function() { 
+		 
+		$.ajax({
+		    type: "POST",
+		    url: "/equipamento/alterarRele",
+		    data: "idControleEstado=1&numeroRele=8&valor="+$("#rele8").prop( "checked" ),
+		    dataType: "json",
+		    headers:createAuthorizationTokenHeader(),
 		    success: function(json){
 		    	  atualizarStatus();		    	              
 		        }		     
