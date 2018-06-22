@@ -96,7 +96,7 @@ public class EquipamentoController  extends BasicSecurityRestController{
 		c.setPrevencaoAtiva(false);
 		controleEstadoInterDAO.save(c);
 	}
-	@RequestMapping(value="/equipamento/ativarDesativarPrevencao",method = RequestMethod.GET)
+	@RequestMapping(value="/equipamento/ativarDesativarPrevencao",method = RequestMethod.POST)
 	public  void ativarDesativarPrevencao(@Param("prevencaoAtiva") Boolean prevencaoAtiva){
 		ControleEstado c=controleEstadoInterDAO.findOne(1);
 		c.setPrevencaoAtiva(prevencaoAtiva);

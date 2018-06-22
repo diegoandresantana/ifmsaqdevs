@@ -92,16 +92,36 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+<!-- 	<build> -->
+<!-- 		<plugins> -->
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.springframework.boot</groupId> -->
+<!-- 				<artifactId>spring-boot-maven-plugin</artifactId> -->
 				 
-			</plugin>
-		</plugins>
+<!-- 			</plugin> -->
+<!-- 		</plugins> -->
+<!-- 	</build> -->
+	<build>
+	  <plugins>
+	    <plugin>
+	      <groupId>com.heroku.sdk</groupId>
+	      <artifactId>heroku-maven-plugin</artifactId>
+	       <version>1.2.0</version>
+	      <configuration>
+	      	<appName>timao</appName>	    	 
+	      	<jdkVersion>1.8</jdkVersion>
+	      	<configVars>
+			  <MY_VAR>SomeValue</MY_VAR>
+			  <JAVA_OPTS>-Xss512k -XX:+UseCompressedOops</JAVA_OPTS>
+			</configVars>
+	         <processTypes>
+			     <web>java $JAVA_OPTS -cp target/classes:target/dependency/* br.com.timao.TimaoApplication</web>
+			  </processTypes>
+	      </configuration>	       
+	    </plugin>
+	   
+	  </plugins>
 	</build>
-
 	<repositories>
 		<repository>
 			<id>spring-snapshots</id>
