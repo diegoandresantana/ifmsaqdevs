@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ResidencecareApplication {
 	@RequestMapping("/")
-    @ResponseBody
     public String index(){
-        return "Não é que funciona!!";
+        return "forward:/login.html";
     }
+	 
+
 	public static void main(String[] args) {
 		SpringApplication.run(ResidencecareApplication.class, args);
 	}

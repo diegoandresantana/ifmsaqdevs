@@ -6,11 +6,11 @@
 	<groupId>residencecare</groupId>
 	<artifactId>residencecare</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
+	<packaging>jar</packaging> 
+	
 	<name>residencecare</name>
 	<description>Projeto de Cadastro dos jogadores do timao</description>
-
+	  
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -22,6 +22,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		 <start-class>residence.ResidencecareApplication</start-class>
+		
 	</properties>
 
 	<dependencies>
@@ -57,28 +59,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-         <dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
+          
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>webjars-locator</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.7</version>
-		</dependency>
+		 
 		 <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
@@ -89,16 +76,33 @@
 		    <artifactId>findbugs</artifactId>
 		    <version>3.0.1</version>
 		</dependency>
+		  
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
+ 			<!-- <plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+				
+			</plugin> -->
+		 
+	<build>
+	  <plugins>
+	    <plugin>
+	      <groupId>com.heroku.sdk</groupId>
+	      <artifactId>heroku-maven-plugin</artifactId>
+	       <version>1.2.0</version>
+	      <configuration>
+	      	<appName>residencecare</appName>	    	 
+	      	<jdkVersion>1.8</jdkVersion>
+	      	<configVars>
+			  <MY_VAR>SomeValue</MY_VAR>
+			  <JAVA_OPTS>-Xss512k -XX:+UseCompressedOops</JAVA_OPTS>
+			</configVars>
+	         <processTypes>
+			     <web>java $JAVA_OPTS -cp target/classes:target/dependency/* residencecare.ResidencecareApplication</web>
+			  </processTypes>
+	      </configuration>	       
+	    </plugin>
+	  </plugins>
 	</build>
-
-
+       
 </project>

@@ -1,14 +1,6 @@
-/* Full height image header */
-
-.bgimg-1 {
-    
-background-position: center;
-background-size: cover;
-background-image: url("../img/logo.png");
-min-height: 90%;
-margin-top: 0%;	
-margin-bottom:20px;
-
+.imagem {
+margin-bottom:10px;
+width: 100% !important;
 }
  
 .logo{  
@@ -39,7 +31,7 @@ letter-spacing: 5px;
 }
 
 .jumbotron {
-    border-radius: .3rem;
+    border-radius: .2rem;
     text-align: center;
 }
 

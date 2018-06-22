@@ -3,16 +3,11 @@
     vertical-align: middle;
     border-style: none;
 }
-.carousel-control-next {
-    right: 0;
-    color: darkmagenta !important;
-}
-.carousel-control-prev {
-    right: 0;
-    color: darkmagenta !important;
-}
 .texto{
     font-size: 18px;
     font-family: Arial;
     text-align: justify;
+}
+.carousel-item img{
+	width:100% !important;
 }

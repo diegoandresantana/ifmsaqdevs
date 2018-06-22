@@ -14,13 +14,14 @@ $( document ).ready(function() {//documento estiver pronto
 		              celular:{
 		                     required:true
 		              },
-		              mensagem:{
+		              texto:{
 		                     required:true
 		              } 
 				   },
 				   messages: {
 					   nome:{
-		                     required:"Por favor, informe seu nome."
+		                     required:"Por favor, informe seu nome.",
+							 minlength: "Informe um nome com mais de 3 letras."
 		              },
 		              email:{
 		                     required:"É necessário informar um email."
@@ -28,7 +29,7 @@ $( document ).ready(function() {//documento estiver pronto
 		              celular:{
 		                     required:"É necessário informar o número do celular."
 		              },
-		              mensagem:{
+		              texto:{
 		                     required:"A mensagem não pode ficar em branco."
 		              }    
 				   },

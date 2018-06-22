@@ -17,7 +17,9 @@
 		    	  $("#rele5").prop("checked", obj.porta5);
 		    	  $("#rele6").prop("checked", obj.porta6);
 		    	  $("#rele7").prop("checked", obj.porta7);
-		          $("#rele8").prop("checked", obj.porta8);		            
+		          $("#rele8").prop("checked", obj.porta8);	
+		          $("#prevencaoAtiva").prop("checked", obj.prevencaoAtiva);	
+		          
 		        }
 		     
 		 });	 
@@ -132,6 +134,20 @@
 		    type: "POST",
 		    url: "/equipamento/alterarRele",
 		    data: "idControleEstado=1&numeroRele=8&valor="+$("#rele8").prop( "checked" ),
+		    dataType: "json",
+		    headers:createAuthorizationTokenHeader(),
+		    success: function(json){
+		    	  atualizarStatus();		    	              
+		        }		     
+		 });	 
+		
+	});
+	$("#prevencaoAtiva").click(function() { 
+		 
+		$.ajax({
+		    type: "POST",
+		    url: "/equipamento/ativarDesativarPrevencao",
+		    data: "idControleEstado=1&prevencaoAtiva="+$("#prevencaoAtiva").prop( "checked" ),
 		    dataType: "json",
 		    headers:createAuthorizationTokenHeader(),
 		    success: function(json){

@@ -6,10 +6,10 @@
 	<groupId>developergirls</groupId>
 	<artifactId>developergirls</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>jar</packaging> 
 
 	<name>developergirls</name>
-	<description>Projeto de Cadastro dos jogadores do timao</description>
+	<description>Projeto Developer Girls</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -21,7 +21,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
+		<java.version>1.8</java.version> 
+		 <start-class>developergirls.DeveloperGirlsApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -57,28 +58,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-         <dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
+        
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>webjars-locator</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>3.3.7</version>
-		</dependency>
+		 
 		 <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
@@ -90,15 +76,51 @@
 		    <version>3.0.1</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
+	<!-- <plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+				
+			</plugin> -->
+	<build>
+	  <plugins>
+	    <plugin>
+	      <groupId>com.heroku.sdk</groupId>
+	      <artifactId>heroku-maven-plugin</artifactId>
+	       <version>1.2.0</version>
+	      <configuration>
+	      	<appName>developergirls</appName>	    	 
+	      	<jdkVersion>1.8</jdkVersion>
+	      	<configVars>
+			  <MY_VAR>SomeValue</MY_VAR>
+			  <JAVA_OPTS>-Xss512k -XX:+UseCompressedOops</JAVA_OPTS>
+			</configVars>
+	         <processTypes>
+			     <web>java $JAVA_OPTS -cp target/classes:target/dependency/* developergirls.DeveloperGirlsApplication</web>
+			  </processTypes>
+	      </configuration>	       
+	    </plugin>
+	    <plugin>
+             <groupId>net.alchim31.maven</groupId>
+             <artifactId>yuicompressor-maven-plugin</artifactId>
+             <version>1.5.1</version>
+             <executions>
+                    <execution>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+             </executions>
+             <configuration>
+                    <nosuffix>true</nosuffix>
+                    <webappDirectory>${project.build.directory}/</webappDirectory>
+                    <excludes>
+                    	<exclude>**/*.min.css</exclude>
+                        <exclude>**/*.min.js</exclude>
+                        <exclude>**/handlebars-3133af2.js</exclude>
+                        <exclude>**/require.js</exclude>
+                    </excludes>
+              </configuration>
+         </plugin>
+	  </plugins>
 	</build>
-
-
 </project>
