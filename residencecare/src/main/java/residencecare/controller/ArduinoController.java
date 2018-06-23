@@ -62,7 +62,7 @@ public class ArduinoController {
 		 
 	@RequestMapping(value="/arduino/salvarluminosidade",method = RequestMethod.GET)
 	public  String salvarLuminosidade(Luminosidade l) {
-		System.out.println(l.getDado());
+		 
 		Luminosidade o=luminosidadeInterDAO.save(l);
 		if(o.getIdLuminosidade()!=null) {
 			return "ok";

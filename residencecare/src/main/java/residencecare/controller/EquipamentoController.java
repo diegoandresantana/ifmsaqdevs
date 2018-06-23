@@ -82,7 +82,7 @@ public class EquipamentoController  extends BasicSecurityRestController{
 		}
 		Umidade u = umidadeInterDAO.lastItem();
 	    Chuva c=chuvaInterDAO.lastItem();
-		if((c.getDado()>70 && u.getDado()>90) ||  c.getDado()>=91) {
+		if((c.getDado()>70 && u.getDado()>90) ||  c.getDado()>=60) {
 			 
 			return true;
 		}else {
