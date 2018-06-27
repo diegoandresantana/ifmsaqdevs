@@ -1,5 +1,24 @@
 $( document ).ready(function() {
-	  
+	Highcharts.setOptions({
+	    lang: {
+	        months: [
+	            'Janeiro', 'Fevereiro', 'Março', 'Abril',
+	            'Maio', 'Junho', 'Julho', 'Agosto',
+	            'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+	        ],
+	        weekdays: [
+	            'Domingo', 'Segunda', 'Terça', 'Quarta',
+	            'Quinta', 'Sexta', 'Sábado'
+	        ]
+	    }
+	});
+	Highcharts.wrap(Highcharts.Axis.prototype, 'zoom', function (proceed, newMin, newMax) {
+		var ret = proceed.call(this, newMin, newMax);
+	    
+	    delete this.previousZoom;
+	    
+	    return ret;
+	});
 setInterval(function () {
 	atualizaGraficoTemperatura();
 	atualizaGraficoChuva();
@@ -24,9 +43,28 @@ function atualizaGraficoTemperatura(){
  		        	     dataVector.push([t,item.dado]);	                   
 	              });
 		          Highcharts.chart('container-temperatura', {
+		        	  
 		        	 chart: { 
-		        		    type: 'line',
-		        		    zoomType: 'x'
+		        		 panKey: 'shift',
+		        		 reflow:true,
+		        		 panning:true,
+		        		 borderWidth: 1,
+		                 renderTo: 'container-temperatura',
+		                 zoomType: 'xy',
+		                 plotBorderWidth: 1,
+		                 spacingLeft: 3,
+		                 spacingRight: 3,
+		                 spacingTop: 45,
+		                 spacingBottom : 3,
+		                 height : 400,
+		                 resetZoomButton: {
+		                     relativeTo: 'plot',
+		                     position: {
+		                         x: 3,
+		                         y: 3,
+		                         align: 'left'
+		                     }
+		                 }
 			        },
 		            title: {
 		                text: 'Variação de temperatura'
@@ -48,8 +86,8 @@ function atualizaGraficoTemperatura(){
 		                },
 		                labels: {
 			                  format: "{value:%d-%m-%Y %H:%M:%S}" 
-			            },
-			            
+			            } 
+			            ,crosshair: true
 		            }, 
 		            yAxis: { 
 		                title: {
@@ -96,7 +134,16 @@ function atualizaGraficoTemperatura(){
 		                    threshold: null
 		                }
 		            },
-		                         
+		            scrollbar: {
+		                enabled: true,
+		                height: 10,
+		                barBorderWidth: 0,
+		                buttonBorderWidth: 1,
+		                trackBorderWidth: 1,
+		                barBorderRadius: 3,
+		                buttonBorderRadius: 3,
+		                trackBorderRadius: 3
+		            },     
 		            series: [{ 
 		            	 type: 'line',
 		            	name: 'Temperatura',
@@ -139,8 +186,25 @@ function atualizaGraficoTemperatura(){
 	              });
 		          Highcharts.chart('container-chuva', {
 		        	 chart: { 
-		        		    type: 'line',
-		        		    zoomType: 'x'
+		        		 reflow:true,
+		        		 panning:true,
+		        		 borderWidth: 1,
+		                 renderTo: 'container-chuva',
+		                 zoomType: 'xy',
+		                 plotBorderWidth: 1,
+		                 spacingLeft: 3,
+		                 spacingRight: 3,
+		                 spacingTop: 45,
+		                 spacingBottom : 3,
+		                 height : 400,
+		                 resetZoomButton: {
+		                     relativeTo: 'plot',
+		                     position: {
+		                         x: 3,
+		                         y: 3,
+		                         align: 'left'
+		                     }
+		                 }
 			        },
 		            title: {
 		                text: 'Variação da Chuva'
@@ -210,7 +274,16 @@ function atualizaGraficoTemperatura(){
 		                    threshold: null
 		                }
 		            },
-		                         
+		            scrollbar: {
+		                enabled: true,
+		                height: 10,
+		                barBorderWidth: 0,
+		                buttonBorderWidth: 1,
+		                trackBorderWidth: 1,
+		                barBorderRadius: 3,
+		                buttonBorderRadius: 3,
+		                trackBorderRadius: 3
+		            },           
 		            series: [{ 
 		            	 type: 'line',
 		            	name: 'Chuva',
@@ -254,8 +327,25 @@ function atualizaGraficoTemperatura(){
 		              });
 			          Highcharts.chart('container-umidade', {
 			        	 chart: { 
-			        		    type: 'line',
-			        		    zoomType: 'x'
+			        		 reflow:true,
+			        		 panning:true,
+			        		 borderWidth: 1,
+			                 renderTo: 'container-umidade',
+			                 zoomType: 'xy',
+			                 plotBorderWidth: 1,
+			                 spacingLeft: 3,
+			                 spacingRight: 3,
+			                 spacingTop: 45,
+			                 spacingBottom : 3,
+			                 height : 400,
+			                 resetZoomButton: {
+			                     relativeTo: 'plot',
+			                     position: {
+			                         x: 3,
+			                         y: 3,
+			                         align: 'left'
+			                     }
+			                 }
 				        },
 			            title: {
 			                text: 'Variação da Umidade'
@@ -325,7 +415,16 @@ function atualizaGraficoTemperatura(){
 			                    threshold: null
 			                }
 			            },
-			                         
+			            scrollbar: {
+			                enabled: true,
+			                height: 10,
+			                barBorderWidth: 0,
+			                buttonBorderWidth: 1,
+			                trackBorderWidth: 1,
+			                barBorderRadius: 3,
+			                buttonBorderRadius: 3,
+			                trackBorderRadius: 3
+			            },           
 			            series: [{ 
 			            	 type: 'line',
 			            	name: 'Umidade',
@@ -368,8 +467,25 @@ function atualizaGraficoTemperatura(){
 			              });
 				          Highcharts.chart('container-luminosidade', {
 				        	 chart: { 
-				        		    type: 'line',
-				        		    zoomType: 'x'
+				        		 reflow:true,
+				        		 panning:true,
+				        		 borderWidth: 1,
+				                 renderTo: 'container-luminosidade',
+				                 zoomType: 'xy',
+				                 plotBorderWidth: 1,
+				                 spacingLeft: 3,
+				                 spacingRight: 3,
+				                 spacingTop: 45,
+				                 spacingBottom : 3,
+				                 height : 400,
+				                 resetZoomButton: {
+				                     relativeTo: 'plot',
+				                     position: {
+				                         x: 3,
+				                         y: 3,
+				                         align: 'left'
+				                     }
+				                 }
 					        },
 				            title: {
 				                text: 'Variação da Luminosidade'
@@ -439,7 +555,16 @@ function atualizaGraficoTemperatura(){
 				                    threshold: null
 				                }
 				            },
-				                         
+				            scrollbar: {
+				                enabled: true,
+				                height: 10,
+				                barBorderWidth: 0,
+				                buttonBorderWidth: 1,
+				                trackBorderWidth: 1,
+				                barBorderRadius: 3,
+				                buttonBorderRadius: 3,
+				                trackBorderRadius: 3
+				            },           
 				            series: [{ 
 				            	 type: 'line',
 				            	name: 'Luminosidade',
